@@ -1,0 +1,932 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第四章View的工作原理
+初识ViewRoot和DecorView
+ViewRoot对应于ViewRootImpl类，它是连接WindowManager和DecorView的纽带，View的三大流程均是通过ViewRoot来完成的。
+在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将View">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索读书笔记：四">
+<meta property="og:url" content="http://blog.honge.me/2016/01/10/Android-art-04/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="第四章View的工作原理
+初识ViewRoot和DecorView
+ViewRoot对应于ViewRootImpl类，它是连接WindowManager和DecorView的纽带，View的三大流程均是通过ViewRoot来完成的。
+在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将View">
+<meta property="og:updated_time" content="2016-03-31T03:59:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索读书笔记：四">
+<meta name="twitter:description" content="第四章View的工作原理
+初识ViewRoot和DecorView
+ViewRoot对应于ViewRootImpl类，它是连接WindowManager和DecorView的纽带，View的三大流程均是通过ViewRoot来完成的。
+在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将View">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> Android开发艺术探索读书笔记：四 | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android开发艺术探索读书笔记：四
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-10T14:08:54+08:00" content="2016-01-10">
+              2016-01-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/10/Android-art-04/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/10/Android-art-04/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><p>View的工作原理</p>
+<h3 id="初识ViewRoot和DecorView"><a href="#初识ViewRoot和DecorView" class="headerlink" title="初识ViewRoot和DecorView"></a>初识ViewRoot和DecorView</h3><ol>
+<li>ViewRoot对应于ViewRootImpl类，它是连接WindowManager和DecorView的纽带，View的三大流程均是通过ViewRoot来完成的。</li>
+<li>在ActivityThread中，当Activity对象被创建完毕后，会将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView建立关联。</li>
+<li>View的绘制流程是从ViewRoot的performTraversals方法开始的，它经过measure、layout和draw三个过程才能最终将一个View绘制出来，其中measure用来测量View的宽和高，layout用来确定View在容器中放置的位置，而draw则负责将View绘制在屏幕上。</li>
+<li>performTraversals会依次调用performMeasure、performLayout和performDraw三个方法，这三个方法分别完成顶级View的measure、layout和draw这三大流程，其中performMeasure中会调用measure方法，在measure中又会调用onMeasure方法，在onMeasure中则会对所有子元素进行measure过程，这个时候measure流程就从父容器传递到子元素中了，这样就完成了依次measure过程。接着子元素会重复父容器的measure过程，如此反复就完成了整个View树的遍历，同理，performLayout和performDraw的传递流程和performMeasure类似的，唯一的不同就是performDraw的传递过程是在draw方法中通过dispatchDraw来实现的，不过这并没有本质区别。</li>
+<li>measure过程决定了View的宽高，Measure完成后，可以通过getMeasureWidth和getMeasureHeight来获取到View测量后的宽高，几乎所有的情况它都等同于View的最终宽高。Layout过程决定了View的四个顶点的坐标和实际的View的宽高，完成以后，可以通过getTop、getBottom、getLeft和getRight来拿到View的四个顶点的位置，并可以通过getWidth和gitHeight方法来拿到View最终的宽高。Draw过程决定了View的显示，只有draw方法完成后View的内容才能够呈现在屏幕上。</li>
+<li>DecorView作为顶级View，其实它是一个FrameLayout，一般情况下会包含一个竖直方向的LinearLayout，一个titleBar和一个Content（android.R.id.content）。View层的事件都先经过DecorView，然后才传递给我们的View。</li>
+</ol>
+<h3 id="理解MeasureSpec"><a href="#理解MeasureSpec" class="headerlink" title="理解MeasureSpec"></a>理解MeasureSpec</h3><p>MeasureSpec在很大程度上决定了一个View的尺寸规格。在测量的过程中，系统会将View的LayoutParams根据父容器所施加的规则转换成对应的MeasureSpec，然后再根据这个measureSpec来测量出View的宽高。</p>
+<h4 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h4><p>MeasureSpec代表一个32位int值，高2位代表SpecMode，低30位代表SpecSize，SpecMode是指测量模式，而SpecSize是指在某种测量模式下的规格大小。<br>SpecMode有三类</p>
+<ol>
+<li>UNSPECIFIED<br> 父容器不对View有任何限制，要多大给多大，这种情况一般用于系统内部，表示一种测量的状态。</li>
+<li>EXACTLY<br> 父容器已经检查出View所需要的精确大小，这个时候View的最终大小就是SpecSize所指定的值。它对应于LayoutParams中的match_parent和具体的数值这两种模式。</li>
+<li>AT_MOST<br> 父容器指定了一个可用大小即SpecSize，View的大小不能大于这个值，具体是什么值要看不同View的具体实现。它对应于LayoutParams中的wrap_content。</li>
+</ol>
+<h4 id="MeasureSpec和LayoutParams的对应关系"><a href="#MeasureSpec和LayoutParams的对应关系" class="headerlink" title="MeasureSpec和LayoutParams的对应关系"></a>MeasureSpec和LayoutParams的对应关系</h4><p>在View测量的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后再根据这个MeasureSpec来确定View测量后的宽高。需要注意的是MeasureSpec不是唯一由LayoutParams决定的，LayoutParams需要和父容器一起才能决定View的MeasureSpec，从而进一步决定View的宽高。对于DecorView，其MeasureSpec由窗口的尺寸和自身的LayoutParams共同决定，对于普通的View，其MeasureSpec是由父容器的MeasureSpec和自身的LayoutParams来共同决定的，MeasureSpec一旦确定后，onMeasure中就可以确定View的测量宽高了。<br>当View采用固定宽高的时候，不管父容器的MeasureSpec是什么，View的MeasureSpec都是精确模式并且大小遵循LayoutParams中的大小。<br>当View的宽高是match_parent的时候，如果父容器是精准模式，那么View也是精准模式并且其大小是父容器剩余空间；如果父容器是最大模式，那么View也是最大模式并且大小不会超过父容器的剩余空间。<br>当View的宽高是wrap_content的时候，不管父容器的模式是精准还是最大化，View的模式总是最大化并且大小不能超过父容器的剩余空间。</p>
+<h3 id="View的工作流程"><a href="#View的工作流程" class="headerlink" title="View的工作流程"></a>View的工作流程</h3><h4 id="measure过程"><a href="#measure过程" class="headerlink" title="measure过程"></a>measure过程</h4><p>如果是一个View，那么调用measure就可以完成测量，如果是一个ViewGroup，除了要测量自己，还要测量子元素。<br>最好是在onLayout方法中获取View 的最终宽高。<br>在Acitivy中获取View的宽高。</p>
+<ol>
+<li>Activity/View#onWindowFocusChanged<br> View已经初始化完毕了，可以获取到宽高。需要注意的是，onWindowFocusChanged会被调用多次，当Activity的窗口得到焦点和失去焦点均会被调用。</li>
+<li>View.post(runnable)<br> 通过post可以将一个runnable投递到消息队列的尾部，然后等Looper调用此runnable的时候，View也已经初始化好了。</li>
+<li>ViewTreeObserver<br> 使用ViewTreeObserver的众多回调可以实现这个功能，比如使用OnGlobaLayoutListener这个接口，当View树的状态发生改变或者View树内部的View的可见性发生改变时，onGlobalLayout方法会被回调，此方法也会被调用多次。</li>
+<li><p>view.measure()<br> 通过手动对View进行measure来得到View的宽高。<br> match_parent：无法得出具体的宽高。<br> wrap_content：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> widthMeasureSpec = MeasureSpec.makeMeasureSpec((<span class="number">1</span> &lt;&lt; <span class="number">30</span>) - <span class="number">1</span>,MeasureSpec.AT_MOST);</span><br><span class="line"><span class="keyword">int</span> heightMeasureSpec = MeasuresPec.makeMeasureSpec((<span class="number">1</span> &lt;&lt; <span class="number">30</span>) - <span class="number">1</span>,MeasureSpec.AT_MOST);</span><br><span class="line">view.measure(widthMeasureSpec,heightMeasureSpec);</span><br></pre></td></tr></table></figure>
+<p> 具体数值：宽高都是100px</p>
+ <figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> widthMeasureSpec = MeasureSpec.makeMeasureSpec(<span class="number">100</span>,MeasureSpec.EXACTLY)<span class="comment">;</span></span><br><span class="line"><span class="keyword">int</span> heightMeasureSpec = MeasuresPec.makeMeasureSpec(<span class="number">100</span>,MeasureSpec.EXACTLY)<span class="comment">;</span></span><br><span class="line">view.measure(widthMeasureSpec,heightMeasureSpec)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="layout过程"><a href="#layout过程" class="headerlink" title="layout过程"></a>layout过程</h4><p>layout方法的大致流程：首先通过setFrame方法来设定View的四个顶点的位置，接着调用onLayout方法，确定子元素的位置。</p>
+<h4 id="draw过程"><a href="#draw过程" class="headerlink" title="draw过程"></a>draw过程</h4><p>View的绘制过程：<br>绘制背景background.draw(canvas)，绘制自己(onDraw)，绘制children(dispatchDraw)，绘制装饰(onDrawScrollBars)</p>
+<h3 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h3><h4 id="自定义View的分类"><a href="#自定义View的分类" class="headerlink" title="自定义View的分类"></a>自定义View的分类</h4><ol>
+<li>继承View重写onDraw 方法<br> 这种方法主要用于实现一些不规则的效果，即这种效果不方便通过布局的组合方式来达到，往往需要静态或者动态的显示一些不规则的图形。采用这种方法需要自己支持wrap_content，并且padding也需要自己处理。</li>
+<li>继承ViewGroup派生特殊的Layout<br> 这种方法主要用于实现自定义的布局。</li>
+<li>继承特定的View<br> 一般用于扩展某种已有View的功能。</li>
+<li>继承特定的ViewGroup<br> 当某种效果看起来很像几种View组合在一起的时候，可以采用这种方法实现。</li>
+</ol>
+<h4 id="自定义View须知"><a href="#自定义View须知" class="headerlink" title="自定义View须知"></a>自定义View须知</h4><ol>
+<li>让View支持wrap_content</li>
+<li>如果有必要，让View支持padding</li>
+<li>尽量不要在View中使用Handler</li>
+<li>View中如果有线程或者动画，需要及时停止。可以在onDetachedFromWindow中调用</li>
+<li>View带有滑动嵌套情形时，需要处理好滑动冲突</li>
+</ol>
+<h4 id="自定义View的思想"><a href="#自定义View的思想" class="headerlink" title="自定义View的思想"></a>自定义View的思想</h4><p>  首先掌握基本功，比如View的弹性滑动、滑动冲突、绘制原理等，这些东西都是自定义View必须的，尤其是那些看起来很炫的自定义View，它们往往对这些技术点的要求更高；熟练掌握基本功以后，在面对新的自定义View时，要能够对其分类并选择合适的实现思路；另外平时还需要多积累一些自定义View相关的经验，并逐渐做到融会贯通，通过这种思想慢慢的就可以提高自定义View的水平了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/09/tools-rime/" rel="next" title="【工具】 输入法-鼠须管">
+                <i class="fa fa-chevron-left"></i> 【工具】 输入法-鼠须管
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/11/Android-bdlocation/" rel="prev" title="百度地图定位SDK的一些知识点">
+                百度地图定位SDK的一些知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/10/Android-art-04/"
+           data-title="Android开发艺术探索读书笔记：四" data-url="http://blog.honge.me/2016/01/10/Android-art-04/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章"><span class="nav-number">1.</span> <span class="nav-text">第四章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识ViewRoot和DecorView"><span class="nav-number">1.1.</span> <span class="nav-text">初识ViewRoot和DecorView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解MeasureSpec"><span class="nav-number">1.2.</span> <span class="nav-text">理解MeasureSpec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MeasureSpec"><span class="nav-number">1.2.1.</span> <span class="nav-text">MeasureSpec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MeasureSpec和LayoutParams的对应关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">MeasureSpec和LayoutParams的对应关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View的工作流程"><span class="nav-number">1.3.</span> <span class="nav-text">View的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#measure过程"><span class="nav-number">1.3.1.</span> <span class="nav-text">measure过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout过程"><span class="nav-number">1.3.2.</span> <span class="nav-text">layout过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#draw过程"><span class="nav-number">1.3.3.</span> <span class="nav-text">draw过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义View"><span class="nav-number">1.4.</span> <span class="nav-text">自定义View</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View的分类"><span class="nav-number">1.4.1.</span> <span class="nav-text">自定义View的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View须知"><span class="nav-number">1.4.2.</span> <span class="nav-text">自定义View须知</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义View的思想"><span class="nav-number">1.4.3.</span> <span class="nav-text">自定义View的思想</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

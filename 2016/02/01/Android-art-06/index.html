@@ -1,0 +1,945 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第六章Android 的DrawableDrawable表示的是一种可以在Canvas上绘制的抽象的概念，它的种类很多，最常见的颜色和图片都可以是Drawable。
+Drawable简介Drawable有很多种，它们都表示一种图像的概念，但是它们又不全是图片，通过颜色也可以构造各式各样的图像效果。Drawable的内部宽高参数比较重要，通过getIntrinsicWidth和getIntrinsi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索读书笔记：六">
+<meta property="og:url" content="http://blog.honge.me/2016/02/01/Android-art-06/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="第六章Android 的DrawableDrawable表示的是一种可以在Canvas上绘制的抽象的概念，它的种类很多，最常见的颜色和图片都可以是Drawable。
+Drawable简介Drawable有很多种，它们都表示一种图像的概念，但是它们又不全是图片，通过颜色也可以构造各式各样的图像效果。Drawable的内部宽高参数比较重要，通过getIntrinsicWidth和getIntrinsi">
+<meta property="og:updated_time" content="2016-03-31T03:59:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索读书笔记：六">
+<meta name="twitter:description" content="第六章Android 的DrawableDrawable表示的是一种可以在Canvas上绘制的抽象的概念，它的种类很多，最常见的颜色和图片都可以是Drawable。
+Drawable简介Drawable有很多种，它们都表示一种图像的概念，但是它们又不全是图片，通过颜色也可以构造各式各样的图像效果。Drawable的内部宽高参数比较重要，通过getIntrinsicWidth和getIntrinsi">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> Android开发艺术探索读书笔记：六 | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android开发艺术探索读书笔记：六
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-01T14:35:02+08:00" content="2016-02-01">
+              2016-02-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/01/Android-art-06/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/01/Android-art-06/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><p>Android 的Drawable<br>Drawable表示的是一种可以在Canvas上绘制的抽象的概念，它的种类很多，最常见的颜色和图片都可以是Drawable。</p>
+<h3 id="Drawable简介"><a href="#Drawable简介" class="headerlink" title="Drawable简介"></a>Drawable简介</h3><p>Drawable有很多种，它们都表示一种图像的概念，但是它们又不全是图片，通过颜色也可以构造各式各样的图像效果。<br>Drawable的内部宽高参数比较重要，通过getIntrinsicWidth和getIntrinsicHeight获取。但是并不是所有的Drawable都有内部宽高，比如颜色。</p>
+<h3 id="Drawable的分类"><a href="#Drawable的分类" class="headerlink" title="Drawable的分类"></a>Drawable的分类</h3><h4 id="BitmapDrawable"><a href="#BitmapDrawable" class="headerlink" title="BitmapDrawable"></a>BitmapDrawable</h4><p>最简单的Drawable，表示的就是一张图片。可以直接引用图片，也能在xml中定义<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>xml <span class="built_in">version</span>=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span><br><span class="line">&lt;bitmap xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:src=<span class="string">"@drawable/ic_launcher"</span><span class="comment"> //图片的资源id</span></span><br><span class="line">    android:antialias=<span class="string">"true"</span><span class="comment"> //开启抗锯齿</span></span><br><span class="line">    android:dither=<span class="string">"true"</span><span class="comment"> //开启抖动</span></span><br><span class="line">    android:<span class="built_in">filter</span>=<span class="string">"true"</span><span class="comment"> //开启过滤</span></span><br><span class="line">    android:gravity=<span class="string">"top"</span><span class="comment"> //当图片小于容器对图片进行定位</span></span><br><span class="line">    android:mipMap=<span class="string">"false"</span><span class="comment"> //纹理映射</span></span><br><span class="line">    android:tileMode=<span class="string">"clamp"</span><span class="comment"> //平铺模式</span></span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>NinePathDrawable 和 BitmapDrawable的属性用法类似</p>
+<h4 id="ShapeDrawable"><a href="#ShapeDrawable" class="headerlink" title="ShapeDrawable"></a>ShapeDrawable</h4><p>可以理解为是颜色构造出来的图像，可以是普通的，也可以是渐变的。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">shape</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:shape</span>=<span class="string">"line"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">corners</span></span><br><span class="line">        <span class="attr">android:bottomLeftRadius</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:bottomRightRadius</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:radius</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:topLeftRadius</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:topRightRadius</span>=<span class="string">"0.5dp"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gradient</span></span><br><span class="line">        <span class="attr">android:angle</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:centerColor</span>=<span class="string">"6"</span></span><br><span class="line">        <span class="attr">android:centerX</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">android:centerY</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">android:endColor</span>=<span class="string">"#FF000000"</span></span><br><span class="line">        <span class="attr">android:gradientRadius</span>=<span class="string">"10dp"</span></span><br><span class="line">        <span class="attr">android:startColor</span>=<span class="string">"#FFFFFFFF"</span></span><br><span class="line">        <span class="attr">android:type</span>=<span class="string">"linear"</span></span><br><span class="line">        <span class="attr">android:useLevel</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">padding</span></span><br><span class="line">        <span class="attr">android:bottom</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:left</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:right</span>=<span class="string">"0.5dp"</span></span><br><span class="line">        <span class="attr">android:top</span>=<span class="string">"0.5dp"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">size</span> <span class="attr">android:height</span>=<span class="string">"200dp"</span></span><br><span class="line">        <span class="attr">android:width</span>=<span class="string">"200dp"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">solid</span> <span class="attr">android:color</span>=<span class="string">"#FF888888"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">stroke</span> <span class="attr">android:color</span>=<span class="string">"#FF333333"</span></span><br><span class="line">        <span class="attr">android:width</span>=<span class="string">"5dp"</span></span><br><span class="line">        <span class="attr">android:dashWidth</span>=<span class="string">"50dp"</span></span><br><span class="line">        <span class="attr">android:dashGap</span>=<span class="string">"5dp"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>shape标签创建的实际上是GradientDrawable</p>
+<ol>
+<li>android:shape<br> 表示图形的形状，有四个选项：rectangle（矩形）、oval（椭圆）、line（横线）和ring（圆环）。它的默认值是矩形，另外line和ring这两个选项必须要通过<code>&lt;stroke&gt;</code>标签来指定线的宽度和颜色等信息，否则无法达到预期的显示效果。针对ring这个形状，有5个特殊的属性：<ol>
+<li>android:innerRadius 圆环的内半径</li>
+<li>android:thickness 圆环的厚度</li>
+<li>android:innerRadiusRatio 内半径占整个Drawable宽度的比例，默认为9</li>
+<li>android:thicknessRatio 厚度占整个Drawable宽度的比例，默认为3</li>
+<li>android:useLevel 一般都使用false</li>
+</ol>
+</li>
+<li><code>&lt;corners&gt;</code><br> 表示shape四个角的角度，它只适用于矩形shape，这里的角度是指圆角的程度，用px来表示。<ol>
+<li>android:radius 为四个角设定相同的角度</li>
+<li>android:topLeftRadius 左上角</li>
+<li>android:topRightRadius 右上角</li>
+<li>android:bottomLeftRadius 左下角</li>
+<li>android:bottomRightRadius 右下角</li>
+</ol>
+</li>
+<li><code>&lt;gradient&gt;</code><br> 它与<solid>标签是互相排斥的，其中solid表示纯色填充，而gradient表示渐变效果，gradient有如下几个属性：<ol>
+<li>android:angle 渐变的角度，默认为0，其值必须为45的倍数，0表示从左到右，90表示从上到下</li>
+<li>android:centerX 渐变中心点的横座标</li>
+<li>android:centerY 渐变中心点的纵座标</li>
+<li>android:startColor 渐变的起始色</li>
+<li>android:centerColor 渐变的中间色</li>
+<li>android:endColor 渐变的结束色</li>
+<li>android:gradientRadius 渐变的半径，仅当android:type=”radial”时有效</li>
+<li>android:useLevel 一般为false，当Drawable作为StateListDrawable时为true</li>
+<li>android:type 渐变的类型，有linear（线型渐变）、radial（径向渐变）、sweep（扫描线渐变）三种</li>
+</ol>
+</solid></li>
+<li><code>&lt;solid&gt;</code><br> 这个标签表示纯色填充，通过android:color即可指定shape填充的颜色</li>
+<li><code>&lt;stroke&gt;</code><br> shape的描边，有如下几个属性<ol>
+<li>android:width 描边的宽度</li>
+<li>android:color 描边的颜色</li>
+<li>android:dashWidth 组成虚线的线段的宽度</li>
+<li>android:dashGap 组成虚线的线段之间的间隔</li>
+</ol>
+</li>
+<li><code>&lt;padding&gt;</code><br> 这个表示空白，但他表示的不是shape的空白，而是包含它的View的空白，android:left、android:top、android:right、android:bottom</li>
+<li><code>&lt;size&gt;</code><br> shape的大小，有两个属性android:width 和 android:height</li>
+</ol>
+<h4 id="LayerDrawable"><a href="#LayerDrawable" class="headerlink" title="LayerDrawable"></a>LayerDrawable</h4><p>LayerDrawable 对应的XML标签是<code>&lt;layer-list&gt;</code>，它表示一种层次化的Drawable集合。<br>通过将不同的Drawable放置在不同的层上面从而达到一种叠加后的效果<br>一个layer-list可以包含多个item，每个item表示一个Drawable。item的结构也比较简单，比较常用的属性有android:top,android:bottom,android:left和android:right，它们分别表示Drawable相对于View的上下左右偏移量。我们可以通过android:drawable 来引用一个已有的Drawable资源，也可以在item中自定义Drawable。</p>
+<h4 id="StateListDrawable"><a href="#StateListDrawable" class="headerlink" title="StateListDrawable"></a>StateListDrawable</h4><p>StateListDrawable对应于<code>&lt;selector&gt;</code>标签，它也是Drawable的集合，每个Drawable对应着一种状态，这样系统就会根据view的状态来显示合适的Drawable<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:constantSize</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attr">android:dither</span>=<span class="string">"true"</span></span><br><span class="line">    <span class="attr">android:variablePadding</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">        <span class="attr">android:state_pressed</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_focused</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_hovered</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_selected</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_checked</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_checkable</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_enabled</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_activated</span>=<span class="string">"true"</span></span><br><span class="line">        <span class="attr">android:state_window_focused</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>android:constantSize<br> StateListDrawable的固有大小是否不随着其状态的改变而改变。默认为false。</li>
+<li>android:dither<br> 是否开启抖动效果，默认为true</li>
+<li>android:variablePadding<br> StateListDrawable的padding是否随其状态的改变而改变。</li>
+</ol>
+<h4 id="LevelListDrawable"><a href="#LevelListDrawable" class="headerlink" title="LevelListDrawable"></a>LevelListDrawable</h4><p>LevelListDrawable对应于<code>&lt;level-list&gt;</code>标签，它同样表示一个Drawable的集合，集合中每一个Drawable都有一个等级的概念，根据不同的等级切换不同的Drawable.<br>android:minLevel 和 android:maxLevel 来指定LevelListDrawable的等级范围，范围取值0~10000，默认为0。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">level-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">        <span class="attr">android:maxLevel</span>=<span class="string">"0"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher2"</span></span><br><span class="line">        <span class="attr">android:maxLevel</span>=<span class="string">"1"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">level-list</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="TransitionDrawable"><a href="#TransitionDrawable" class="headerlink" title="TransitionDrawable"></a>TransitionDrawable</h4><p>TransitionDrawable对应于<code>&lt;transition&gt;</code>标签，它用于实现两个Drawable之间的淡入淡出效果。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher2"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>用作背景<br>在代码中使用<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TextView tvText = (TextView) findViewById(R.id.tvText)<span class="comment">;</span></span><br><span class="line">TransitionDrawable transitionDrawable = (TransitionDrawable) tvText.getBackground()<span class="comment">;</span></span><br><span class="line">transitionDrawable.startTransition(<span class="number">1000</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="InsetDrawable"><a href="#InsetDrawable" class="headerlink" title="InsetDrawable"></a>InsetDrawable</h4><p>InsetDrawable对应<code>&lt;inset&gt;</code> 标签，它可以将其他Drawable内嵌到自己当中，并可以四周留出一定的间距。</p>
+<h4 id="ScaleDrawable"><a href="#ScaleDrawable" class="headerlink" title="ScaleDrawable"></a>ScaleDrawable</h4><p>ScaleDrawable对应于<code>&lt;scale&gt;</code>标签，它可以根据自己的等级来缩放指定Drawable。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">scale</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">    <span class="attr">android:scaleGravity</span>=<span class="string">"top"</span></span><br><span class="line">    <span class="attr">android:scaleHeight</span>=<span class="string">"25%"</span></span><br><span class="line">    <span class="attr">android:scaleWidth</span>=<span class="string">"25%"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scale</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>设置level后，才会进行缩放<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">View view = findViewById(R.id.tvText)<span class="comment">;</span></span><br><span class="line"><span class="keyword">ScaleDrawable </span><span class="keyword">scaleDrawable </span>= (<span class="keyword">ScaleDrawable) </span>view.getBackground()<span class="comment">;</span></span><br><span class="line"><span class="keyword">scaleDrawable.setLevel(1);</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="ClipDrawable"><a href="#ClipDrawable" class="headerlink" title="ClipDrawable"></a>ClipDrawable</h4><p>ClipDrawable对应<code>&lt;clip&gt;</code>标签，它可以根据自己当前的等级来裁剪另一个Drawable，裁剪方向可以通过android:clipOrientation 和 android:gravity 共同控制。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">clip</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:clipOrientation</span>=<span class="string">"horizontal"</span></span><br><span class="line">    <span class="attr">android:drawable</span>=<span class="string">"@mipmap/ic_launcher"</span></span><br><span class="line">    <span class="attr">android:gravity</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在代码中裁剪<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClipDrawable clipDrawable = (ClipDrawable) v.getBackground()<span class="comment">;</span></span><br><span class="line">clipDrawable.setLevel(<span class="number">4000</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义Drawable"><a href="#自定义Drawable" class="headerlink" title="自定义Drawable"></a>自定义Drawable</h3><p>Drawable的使用范围很单一，一个是作为ImageView的图像来显示，一个是作为View的背景。<br>Drawable工作原理很简单，其核心就是draw方法。一般情况下没有必要自定义Drawable。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerDrawable</span> <span class="keyword">extends</span> <span class="title">Drawable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomerDrawable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        paint = <span class="keyword">new</span> Paint(Paint.ANTI_ALIAS_FLAG);</span><br><span class="line">        paint.setColor(Color.RED);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        Rect rect = getBounds();</span><br><span class="line">        <span class="keyword">float</span> cx = rect.exactCenterX();</span><br><span class="line">        <span class="keyword">float</span> cy = rect.exactCenterY();</span><br><span class="line">        canvas.drawCircle(cx,cy,Math.min(cx,cy),paint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAlpha</span><span class="params">(<span class="keyword">int</span> alpha)</span> </span>&#123;</span><br><span class="line">        paint.setAlpha(alpha);</span><br><span class="line">        invalidateSelf();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColorFilter</span><span class="params">(ColorFilter colorFilter)</span> </span>&#123;</span><br><span class="line">        paint.setColorFilter(colorFilter);</span><br><span class="line">        invalidateSelf();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getOpacity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> PixelFormat.TRANSLUCENT;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>自定义了一个圆形的背景，不过不能在xml中使用，需要在代码中new生成。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/29/Android-art-05/" rel="next" title="Android开发艺术探索读书笔记：五">
+                <i class="fa fa-chevron-left"></i> Android开发艺术探索读书笔记：五
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/16/Android-art-07/" rel="prev" title="Android开发艺术探索读书笔记：七">
+                Android开发艺术探索读书笔记：七 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/01/Android-art-06/"
+           data-title="Android开发艺术探索读书笔记：六" data-url="http://blog.honge.me/2016/02/01/Android-art-06/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章"><span class="nav-number">1.</span> <span class="nav-text">第六章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Drawable简介"><span class="nav-number">1.1.</span> <span class="nav-text">Drawable简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drawable的分类"><span class="nav-number">1.2.</span> <span class="nav-text">Drawable的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BitmapDrawable"><span class="nav-number">1.2.1.</span> <span class="nav-text">BitmapDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ShapeDrawable"><span class="nav-number">1.2.2.</span> <span class="nav-text">ShapeDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LayerDrawable"><span class="nav-number">1.2.3.</span> <span class="nav-text">LayerDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StateListDrawable"><span class="nav-number">1.2.4.</span> <span class="nav-text">StateListDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LevelListDrawable"><span class="nav-number">1.2.5.</span> <span class="nav-text">LevelListDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TransitionDrawable"><span class="nav-number">1.2.6.</span> <span class="nav-text">TransitionDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#InsetDrawable"><span class="nav-number">1.2.7.</span> <span class="nav-text">InsetDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ScaleDrawable"><span class="nav-number">1.2.8.</span> <span class="nav-text">ScaleDrawable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ClipDrawable"><span class="nav-number">1.2.9.</span> <span class="nav-text">ClipDrawable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Drawable"><span class="nav-number">1.3.</span> <span class="nav-text">自定义Drawable</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第一种123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384/** * @param params       传递的普通参数 * @p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Android】Android 上传图片">
+<meta property="og:url" content="http://blog.honge.me/2016/04/01/Android-uploadfile/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="第一种123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384/** * @param params       传递的普通参数 * @p">
+<meta property="og:updated_time" content="2016-04-07T07:16:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Android】Android 上传图片">
+<meta name="twitter:description" content="第一种123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384/** * @param params       传递的普通参数 * @p">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> 【Android】Android 上传图片 | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                【Android】Android 上传图片
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-01T16:43:27+08:00" content="2016-04-01">
+              2016-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/01/Android-uploadfile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/01/Android-uploadfile/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * @param params       传递的普通参数</span><br><span class="line"> * @param uploadFile   需要上传的文件名</span><br><span class="line"> * @param fileFormName 需要上传文件表单中的名字</span><br><span class="line"> * @param newFileName  上传的文件名称，不填写将为uploadFile的名称</span><br><span class="line"> * @param urlStr       上传的服务器的路径</span><br><span class="line"> * @throws IOException</span><br><span class="line"> */</span></span><br><span class="line">public void uploadForm(Map&lt;String, String&gt; params, String fileFormName,</span><br><span class="line">                       File uploadFile, String newFileName, String urlStr, Context context)</span><br><span class="line">        throws IOException &#123;</span><br><span class="line">    <span class="keyword">if</span> (newFileName == null || newFileName.trim().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">        newFileName = uploadFile.getName()<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    StringBuilder sb = new StringBuilder()<span class="comment">;</span></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 普通的表单数据</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">if</span> (params != null)</span><br><span class="line">        <span class="keyword">for</span> (String key : params.keySet()) &#123;</span><br><span class="line">            sb.append(<span class="string">"--"</span> + BOUNDARY + <span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">            sb.append(<span class="string">"Content-Disposition: form-data; name=\""</span> + key</span><br><span class="line">                    + <span class="string">"\""</span> + <span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">            sb.append(<span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">            sb.append(params.get(key) + <span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 上传文件的头</span><br><span class="line">     */</span></span><br><span class="line">    sb.append(<span class="string">"--"</span> + BOUNDARY + <span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">    sb.append(<span class="string">"Content-Disposition: form-data; name=\""</span> + fileFormName</span><br><span class="line">            + <span class="string">"\"; filename=\""</span> + newFileName + <span class="string">"\""</span> + <span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">    sb.append(<span class="string">"Content-Type: image/jpeg"</span> + <span class="string">"\r\n"</span>)<span class="comment">;// 如果服务器端有文件类型的校验，必须明确指定ContentType</span></span><br><span class="line">    sb.append(<span class="string">"\r\n"</span>)<span class="comment">;</span></span><br><span class="line">    byte[] headerInfo = sb.toString().getBytes(<span class="string">"UTF-8"</span>)<span class="comment">;</span></span><br><span class="line">    byte[] endInfo = (<span class="string">"\r\n--"</span> + BOUNDARY + <span class="string">"--\r\n"</span>).getBytes(<span class="string">"UTF-8"</span>)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">System</span>.out.println(sb.toString())<span class="comment">;</span></span><br><span class="line">    URL url = new URL(urlStr)<span class="comment">;</span></span><br><span class="line">    HttpURLConnection conn = (HttpURLConnection) url.openConnection()<span class="comment">;</span></span><br><span class="line">    conn.setRequestMethod(<span class="string">"POST"</span>)<span class="comment">;</span></span><br><span class="line">    conn.setRequestProperty(<span class="string">"Content-Type"</span>,</span><br><span class="line">            <span class="string">"multipart/form-data; boundary="</span> + BOUNDARY)<span class="comment">;</span></span><br><span class="line">    conn.setRequestProperty(</span><br><span class="line">            <span class="string">"Content-Length"</span>,</span><br><span class="line">            String.valueOf(headerInfo.<span class="keyword">length</span> + uploadFile.<span class="keyword">length</span>()</span><br><span class="line">                    + endInfo.<span class="keyword">length</span>))<span class="comment">;</span></span><br><span class="line">    conn.setDoOutput(true)<span class="comment">;</span></span><br><span class="line">    OutputStream out = conn.getOutputStream()<span class="comment">;</span></span><br><span class="line">    InputStream in = new FileInputStream(uploadFile)<span class="comment">;</span></span><br><span class="line">    <span class="comment">/**文件总大小**/</span></span><br><span class="line">    <span class="comment">//onUploadProcessListener.initUpload((int)uploadFile.length());</span></span><br><span class="line">    Log.e(<span class="string">"TAG"</span>, <span class="string">"length:"</span> + (<span class="keyword">int</span>) uploadFile.<span class="keyword">length</span>())<span class="comment">;</span></span><br><span class="line">    out.write(headerInfo)<span class="comment">;</span></span><br><span class="line">    byte[] buf = new byte[<span class="number">1024</span>]<span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> len<span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> curLen = <span class="number">0</span><span class="comment">; //当前长度</span></span><br><span class="line">    <span class="keyword">while</span> ((len = in.read(buf)) != <span class="number">-1</span>) &#123;</span><br><span class="line">        out.write(buf, <span class="number">0</span>, len)<span class="comment">;</span></span><br><span class="line">        curLen += len<span class="comment">;</span></span><br><span class="line">        <span class="comment">/**上传进度值的大小**/</span></span><br><span class="line">        <span class="comment">//onUploadProcessListener.onUploadProcess(curLen);</span></span><br><span class="line">        Log.e(<span class="string">"TAG"</span>, <span class="string">"current:"</span> + curLen)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    out.write(endInfo)<span class="comment">;</span></span><br><span class="line">    in.close()<span class="comment">;</span></span><br><span class="line">    out.close()<span class="comment">;</span></span><br><span class="line">    String result = <span class="string">""</span><span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> code = conn.getResponseCode()<span class="comment">;</span></span><br><span class="line">    <span class="keyword">if</span> (code == <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">System</span>.out.println(<span class="string">"上传成功"</span>)<span class="comment">;</span></span><br><span class="line">        InputStream <span class="keyword">input</span> = conn.getInputStream()<span class="comment">;</span></span><br><span class="line">        StringBuffer sb1 = new StringBuffer()<span class="comment">;</span></span><br><span class="line">        <span class="keyword">int</span> ss<span class="comment">;</span></span><br><span class="line">        <span class="keyword">while</span> ((ss = <span class="keyword">input</span>.read()) != <span class="number">-1</span>) &#123;</span><br><span class="line">            sb1.append((char) ss)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        result = sb1.toString()<span class="comment">;</span></span><br><span class="line">        <span class="comment">// 回调方法</span></span><br><span class="line"><span class="comment">//            sendMessage(1, result);</span></span><br><span class="line">        Log.e(<span class="string">"TAG"</span>, <span class="string">"result:"</span> + result)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//            saveUploadFile(mContext, result);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h2><p>将图片文件转成base64字符串上传</p>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">public static String syncImage(List&lt;ImageModel&gt; imageModels, String Imei) throws JSONException, IOException &#123;</span><br><span class="line">    <span class="keyword">if</span> (imageModels == null || imageModels.size() == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span><span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    JSONObject object = new JSONObject()<span class="comment">;</span></span><br><span class="line">    object.put(<span class="string">"Imei"</span>, Imei)<span class="comment">;</span></span><br><span class="line">    JSONArray array = new JSONArray()<span class="comment">;</span></span><br><span class="line">    JSONObject item<span class="comment">;</span></span><br><span class="line">    <span class="keyword">for</span> (ImageModel imageModel : imageModels) &#123;</span><br><span class="line">        item = new JSONObject()<span class="comment">;</span></span><br><span class="line">        item.put(<span class="string">"FileName"</span>, imageModel.name)<span class="comment">;</span></span><br><span class="line">        item.put(<span class="string">"FileData"</span>, Base64Helper.encode(FileUtil.getContent(imageModel.path)))<span class="comment">;</span></span><br><span class="line">        item.put(<span class="string">"Created"</span>, imageModel.createDate)<span class="comment">;</span></span><br><span class="line">        array.put(item)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    object.put(<span class="string">"Items"</span>, array)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    HttpClient client = new DefaultHttpClient()<span class="comment">;</span></span><br><span class="line">    HttpPost httpPost = new HttpPost(<span class="string">"http://192.168.253.2:8080/TestJavaEE/Test2"</span>)<span class="comment">;</span></span><br><span class="line">    httpPost.addHeader(<span class="string">"charset"</span>, HTTP.UTF_8)<span class="comment">;</span></span><br><span class="line">    httpPost.setHeader(<span class="string">"Content-Type"</span>,</span><br><span class="line">            <span class="string">"application/json; charset=utf-8"</span>)<span class="comment">;</span></span><br><span class="line">    HttpResponse response = null<span class="comment">;</span></span><br><span class="line">    try &#123;</span><br><span class="line">        httpPost.setEntity(new StringEntity(object.toString()))<span class="comment">;</span></span><br><span class="line">        response = client.execute(httpPost)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">        e.printStackTrace()<span class="comment">;</span></span><br><span class="line">    &#125; catch (ClientProtocolException e) &#123;</span><br><span class="line">        e.printStackTrace()<span class="comment">;</span></span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace()<span class="comment">;</span></span><br><span class="line">    &#125; catch (RuntimeException e) &#123;</span><br><span class="line">        e.printStackTrace()<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    String token = <span class="string">""</span><span class="comment">;</span></span><br><span class="line">    <span class="keyword">if</span> (response != null) &#123;</span><br><span class="line">        <span class="keyword">int</span> code = response.getStatusLine().getStatusCode()<span class="comment">;</span></span><br><span class="line">        Logger.e3(<span class="string">"code:"</span>+code)<span class="comment">;</span></span><br><span class="line">            token = EntityUtils.toString(response.getEntity())<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        response.removeHeaders(<span class="string">"operator"</span>)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> token<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试代码<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="keyword">run</span>() &#123;</span><br><span class="line"><span class="comment">//                doBP66("SWBP66,000000#");</span></span><br><span class="line">        List&lt;ImageModel&gt; models = new ArrayList&lt;ImageModel&gt;()<span class="comment">;</span></span><br><span class="line">        ImageModel model = new ImageModel()<span class="comment">;</span></span><br><span class="line">        model.name = <span class="string">"this.jpg"</span><span class="comment">;</span></span><br><span class="line">        model.path = <span class="string">"mnt/sdcard/zhezhang.jpg"</span><span class="comment">;</span></span><br><span class="line">        model.createDate = <span class="string">"2016-04-02 11:20:00"</span><span class="comment">;</span></span><br><span class="line">        models.add(model)<span class="comment">;</span></span><br><span class="line">        try &#123;</span><br><span class="line">            Logger.e1(<span class="string">"start upload"</span>)<span class="comment">;</span></span><br><span class="line">            UploadFileUtil.syncImage(models, <span class="string">"1111"</span>)<span class="comment">;</span></span><br><span class="line">            Logger.e1(<span class="string">"finish upload"</span>)<span class="comment">;</span></span><br><span class="line">        &#125; catch (JSONException e) &#123;</span><br><span class="line">            e.printStackTrace()<span class="comment">;</span></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace()<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">package me.honge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.BufferedReader;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.File;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.FileOutputStream;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.IOException;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.InputStreamReader;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> java.io.OutputStream;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span><span class="string"> javax.servlet.ServletException;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> javax.servlet.annotation.WebServlet;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> javax.servlet.http.HttpServlet;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> javax.servlet.http.HttpServletRequest;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> javax.servlet.http.HttpServletResponse;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span><span class="string"> com.google.gson.Gson;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> com.google.gson.JsonObject;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span><span class="string"> me.honge.Request.Items;</span></span><br><span class="line"><span class="keyword">import</span><span class="string"> sun.misc.BASE64Decoder;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Servlet implementation class Test2</span><br><span class="line"> */</span></span><br><span class="line">@WebServlet(<span class="string">"/Test2"</span>)</span><br><span class="line">public class Test2 extends <span class="decorator">HttpServlet</span> &#123;</span><br><span class="line">    private static final long serialVersionUID = <span class="number">1</span>L;</span><br><span class="line">       </span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * @see HttpServlet#HttpServlet()</span><br><span class="line">     */</span></span><br><span class="line">    public Test2() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, <span class="decorator">IOException</span> &#123;</span><br><span class="line">         response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, <span class="decorator">IOException</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.doPost(request, resp);</span><br><span class="line">        <span class="built_in">String</span> path = getServletContext().getRealPath(<span class="string">"/"</span>)+<span class="string">"upload"</span>;  </span><br><span class="line">        File file = <span class="keyword">new</span> File(path);  </span><br><span class="line">        System.out.println(file.getAbsolutePath());</span><br><span class="line">        <span class="keyword">if</span>(!file.exists())&#123;  </span><br><span class="line">            file.mkdir();  </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        StringBuilder stb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="built_in">String</span> s = <span class="literal">null</span>;</span><br><span class="line">        BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(request.getInputStream()));</span><br><span class="line">        <span class="keyword">while</span> ((s = br.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">            stb.append(s);</span><br><span class="line">        &#125;</span><br><span class="line">        Gson gson = <span class="keyword">new</span> Gson();</span><br><span class="line">        Request rr = gson.fromJson(stb.toString(), Request.class);</span><br><span class="line">        <span class="keyword">for</span> (Items <span class="attribute">items</span>  : rr.getItems()) &#123;</span><br><span class="line">            string2Image(items.getFileData(), path +<span class="string">"/"</span>+items.getFileName());  </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * 通过BASE64Decoder解码，并生成图片 </span><br><span class="line">     * @param imgStr 解码后的string </span><br><span class="line">     */</span>  </span><br><span class="line">    public boolean string2Image(<span class="built_in">String</span> imgStr, <span class="built_in">String</span> imgFilePath) &#123;  </span><br><span class="line">        <span class="comment">// 对字节数组字符串进行Base64解码并生成图片  </span></span><br><span class="line">        <span class="keyword">if</span> (imgStr == <span class="literal">null</span>)  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">        <span class="decorator"><span class="keyword">try</span></span> &#123;  </span><br><span class="line">            <span class="comment">// Base64解码  </span></span><br><span class="line">            byte[] b = <span class="keyword">new</span> BASE64Decoder().decodeBuffer(imgStr);  </span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; b.length; ++i) &#123;  </span><br><span class="line">                <span class="keyword">if</span> (b[i] &lt; <span class="number">0</span>) &#123;  </span><br><span class="line">                    <span class="comment">// 调整异常数据  </span></span><br><span class="line">                    b[i] += <span class="number">256</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">            <span class="comment">// 生成Jpeg图片  </span></span><br><span class="line">            OutputStream out = <span class="keyword">new</span> FileOutputStream(imgFilePath);  </span><br><span class="line">            out.write(b);  </span><br><span class="line">            out.flush();  </span><br><span class="line">            out.close();  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/30/Android-receiver-for-multiple-actions/" rel="next" title="【Android】在代码中给广播注册多个 IntentFilter">
+                <i class="fa fa-chevron-left"></i> 【Android】在代码中给广播注册多个 IntentFilter
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/01/Android-uploadfile/"
+           data-title="【Android】Android 上传图片" data-url="http://blog.honge.me/2016/04/01/Android-uploadfile/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种"><span class="nav-number">1.</span> <span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种"><span class="nav-number">2.</span> <span class="nav-text">第二种</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端"><span class="nav-number">2.1.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端"><span class="nav-number">2.2.</span> <span class="nav-text">服务端</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,968 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="一、IOS开发环境的搭建安装Xcode
+二、C语言学习1、新建OSX命令行工程选择语言为c语言
+三、Objectiver C语言学习1、新建OC工程选择语言为OC
+2、基本文件格式是.m结尾的
+1234567891011#import &amp;lt;Foundation/Foundation.h&amp;gt;int main(int argc, const char * argv[]) &amp;#123;    @">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS学习笔记一">
+<meta property="og:url" content="http://blog.honge.me/2015/08/30/ios1/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="一、IOS开发环境的搭建安装Xcode
+二、C语言学习1、新建OSX命令行工程选择语言为c语言
+三、Objectiver C语言学习1、新建OC工程选择语言为OC
+2、基本文件格式是.m结尾的
+1234567891011#import &amp;lt;Foundation/Foundation.h&amp;gt;int main(int argc, const char * argv[]) &amp;#123;    @">
+<meta property="og:updated_time" content="2016-03-31T03:59:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS学习笔记一">
+<meta name="twitter:description" content="一、IOS开发环境的搭建安装Xcode
+二、C语言学习1、新建OSX命令行工程选择语言为c语言
+三、Objectiver C语言学习1、新建OC工程选择语言为OC
+2、基本文件格式是.m结尾的
+1234567891011#import &amp;lt;Foundation/Foundation.h&amp;gt;int main(int argc, const char * argv[]) &amp;#123;    @">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> iOS学习笔记一 | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS学习笔记一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-30T12:17:02+08:00" content="2015-08-30">
+              2015-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/30/ios1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/30/ios1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、IOS开发环境的搭建"><a href="#一、IOS开发环境的搭建" class="headerlink" title="一、IOS开发环境的搭建"></a>一、IOS开发环境的搭建</h2><p>安装Xcode</p>
+<h2 id="二、C语言学习"><a href="#二、C语言学习" class="headerlink" title="二、C语言学习"></a>二、C语言学习</h2><h3 id="1、新建OSX命令行工程"><a href="#1、新建OSX命令行工程" class="headerlink" title="1、新建OSX命令行工程"></a>1、新建OSX命令行工程</h3><p>选择语言为c语言</p>
+<h2 id="三、Objectiver-C语言学习"><a href="#三、Objectiver-C语言学习" class="headerlink" title="三、Objectiver C语言学习"></a>三、Objectiver C语言学习</h2><h3 id="1、新建OC工程"><a href="#1、新建OC工程" class="headerlink" title="1、新建OC工程"></a>1、新建OC工程</h3><p>选择语言为OC</p>
+<h3 id="2、基本"><a href="#2、基本" class="headerlink" title="2、基本"></a>2、基本</h3><p>文件格式是.m结尾的</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;<span class="comment">//自动释放池，在这里面的东西不一定会自动释放</span></span><br><span class="line">        <span class="comment">// insert code here...</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Hello, World!"</span>);</span><br><span class="line">        <span class="built_in">NSString</span> * str = <span class="string">@"Hello, World!"</span>;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>NS开头的是在Foundation基础包中的函数</p>
+<p>并且包含了所有c的函数，c语言的都能用</p>
+<h4 id="1、OC里面的字符串"><a href="#1、OC里面的字符串" class="headerlink" title="1、OC里面的字符串"></a>1、OC里面的字符串</h4><p>在字符串前面加一个@</p>
+<p>例如：</p>
+<p><code>@&quot;Hello, World!&quot;</code></p>
+<h4 id="2、OC中新增的变量"><a href="#2、OC中新增的变量" class="headerlink" title="2、OC中新增的变量"></a>2、OC中新增的变量</h4><ol>
+<li>BOOL：<code>取值YES，NO</code></li>
+<li>NSString：<code>NSString * str=@&quot;123&quot;</code>;</li>
+</ol>
+<h3 id="3、类"><a href="#3、类" class="headerlink" title="3、类"></a>3、类</h3><h4 id="1、定义类"><a href="#1、定义类" class="headerlink" title="1、定义类"></a>1、定义类</h4><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类的声明,头文件.h文件</span></span><br><span class="line">@interface <span class="attribute">Student</span> : <span class="decorator">NSObject</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    NSString *name;</span><br><span class="line">    <span class="built_in">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)say;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setName</span>:(NSString *)_name;</span><br><span class="line">-(NSString *)getName;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setAge</span>:(<span class="built_in">int</span>)_age;</span><br><span class="line">-(<span class="built_in">int</span>)getAge;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setName</span>:(NSString *)_name <span class="attribute">andAge</span>:(<span class="built_in">int</span>)_age;</span><br><span class="line"><span class="comment">//-(返回类型)函数名字:（参数类型）参数名 标签：（参数类型）参数名</span></span><br><span class="line">@end</span><br><span class="line"><span class="comment">//类的实现，实现该类的方法.m文件</span></span><br><span class="line">@implementation Student</span><br><span class="line">-(<span class="keyword">void</span>)<span class="decorator">say</span></span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@<span class="string">"我叫%@,我%d岁了！"</span>,name,age);</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setName</span>:(NSString *)<span class="decorator">_name</span></span><br><span class="line">&#123;</span><br><span class="line">    name = _name;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setAge</span>:(<span class="built_in">int</span>)<span class="decorator">_age</span></span><br><span class="line">&#123;</span><br><span class="line">    age = _age;</span><br><span class="line">&#125;</span><br><span class="line">-(NSString *)<span class="decorator">getName</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">int</span>)<span class="decorator">getAge</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>)<span class="attribute">setName</span>:(NSString *)_name <span class="attribute">andAge</span>:(<span class="built_in">int</span>)<span class="decorator">_age</span></span><br><span class="line">&#123;</span><br><span class="line">    name = _name;</span><br><span class="line">    age = _age;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h4 id="2、应用类"><a href="#2、应用类" class="headerlink" title="2、应用类"></a>2、应用类</h4><p><code>#import &quot;Student.h&quot;</code></p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//申请内存，初始化对象</span></span><br><span class="line">Student *stu = [[Student <span class="keyword">alloc</span>]init]<span class="comment">;</span></span><br><span class="line">[stu setName:@<span class="string">"Honge"</span>]<span class="comment">;</span></span><br><span class="line">[stu setAge:<span class="number">20</span>]<span class="comment">;</span></span><br><span class="line">[stu say]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h4 id="3、类的继承"><a href="#3、类的继承" class="headerlink" title="3、类的继承"></a>3、类的继承</h4><h5 id="init方法"><a href="#init方法" class="headerlink" title="init方法"></a>init方法</h5><p>自定义的init方法</p>
+<p><code>-(id)initWithName:(NSString *)_name andWhitAge:(int)_age;</code></p>
+<h5 id="重写父类init方法"><a href="#重写父类init方法" class="headerlink" title="重写父类init方法"></a>重写父类init方法</h5><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//重写父类的init方法（参考项）</span></span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        name = <span class="string">@""</span>;</span><br><span class="line">        age = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//自定义的init方法实现</span></span><br><span class="line">-(<span class="keyword">id</span>)initWithName:(<span class="built_in">NSString</span> *)_name andWhitAge:(<span class="keyword">int</span>)_age</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        name = _name;</span><br><span class="line">        age = _age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、NSArray类"><a href="#4、NSArray类" class="headerlink" title="4、NSArray类"></a>4、NSArray类</h4><h5 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h5><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组可以一次性添加完全，以nil作为结尾标志。  </span></span><br><span class="line">NSArray *array =[NSArray arrayWithObjects:@<span class="string">"DANCER"</span>,@<span class="string">"holy"</span>, nil]<span class="comment">;  </span></span><br><span class="line"><span class="comment">//如果要添加空的话可以用以下方法  </span></span><br><span class="line">NSArray *array1=[NSArray arrayWithObjects:@<span class="string">"dancer"</span>,[NSNull null], nil]<span class="comment">;  </span></span><br><span class="line"><span class="comment">//同字符串一样，可以建立可变更的数组，并设置一个初始量。  </span></span><br><span class="line">NSMutableArray *array2=[NSMutableArray arrayWithCapacity:<span class="number">50</span>]<span class="comment">;  </span></span><br><span class="line"><span class="comment">//下面可以动态添加数组元素  </span></span><br><span class="line">[array2 addObject:@<span class="string">"holy"</span>]<span class="comment">;  </span></span><br><span class="line">[array2 addObject:@<span class="string">"dancer"</span>]<span class="comment">;  </span></span><br><span class="line">[array2 addObject:@<span class="string">"hoho"</span>]<span class="comment">;  </span></span><br><span class="line"><span class="comment">//合并字符串数组  </span></span><br><span class="line">NSString *<span class="keyword">str</span> = [array2 componentsJoinedByString:@<span class="string">"|"</span>]<span class="comment">;  </span></span><br><span class="line">NSLog(<span class="keyword">str</span>)<span class="comment">;  </span></span><br><span class="line"><span class="comment">//字符串切割成数组  </span></span><br><span class="line">NSArray *array3=[<span class="keyword">str</span> componentsSeparatedByString:@<span class="string">"|"</span>]<span class="comment">;  </span></span><br><span class="line">NSLog(@<span class="string">"%@"</span>,array3)<span class="comment">;  </span></span><br><span class="line"><span class="comment">//可变数组元素删除  </span></span><br><span class="line">[array2 removeObjectAtIndex:<span class="number">1</span>]<span class="comment">;  </span></span><br><span class="line">NSLog(@<span class="string">"%@"</span>,array2)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h5 id="NSArray存放的数据"><a href="#NSArray存放的数据" class="headerlink" title="NSArray存放的数据"></a>NSArray存放的数据</h5><p>NSArray可以放一切数据，除了C中的基本数据类型，C中的一些基本元素我们可以用NSNumber类来包装</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> arrayWithCapacity:<span class="number">50</span>];  </span><br><span class="line"><span class="keyword">int</span> age=<span class="number">5</span>;  </span><br><span class="line"><span class="keyword">char</span> c=<span class="string">'c'</span>;  </span><br><span class="line"><span class="keyword">float</span> f=<span class="number">3.14</span>;  </span><br><span class="line"><span class="built_in">NSRect</span> rect =<span class="built_in">NSMakeRect</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);  </span><br><span class="line"><span class="built_in">NSNumber</span> *myAge = [<span class="built_in">NSNumber</span> numberWithInt:age];  </span><br><span class="line"><span class="built_in">NSNumber</span> *myC = [<span class="built_in">NSNumber</span> numberWithChar:c];  </span><br><span class="line"><span class="built_in">NSNumber</span> *myF= [<span class="built_in">NSNumber</span> numberWithFloat:f];  </span><br><span class="line"><span class="built_in">NSValue</span> *value = [<span class="built_in">NSValue</span> valueWithRect:rect];  </span><br><span class="line">[array addObject:myAge];  </span><br><span class="line">[array addObject:myC];  </span><br><span class="line">[array addObject:myF];  </span><br><span class="line">[array addObject:value];  </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,array);</span><br></pre></td></tr></table></figure>
+<h5 id="迭代输出"><a href="#迭代输出" class="headerlink" title="迭代输出"></a>迭代输出</h5><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">NSMutableArray *array = [NSMutableArray arrayWithCapacity:<span class="number">50</span>]<span class="comment">;  </span></span><br><span class="line">[array addObject:@<span class="string">"a"</span>]<span class="comment">;  </span></span><br><span class="line">[array addObject:@<span class="string">"b"</span>]<span class="comment">;  </span></span><br><span class="line">[array addObject:@<span class="string">"c"</span>]<span class="comment">;  </span></span><br><span class="line">[array addObject:@<span class="string">"d"</span>]<span class="comment">;  </span></span><br><span class="line">NSLog(@<span class="string">"%@"</span>,array)<span class="comment">;//以大括号形式输出数组内容  </span></span><br><span class="line"><span class="comment">//第一种迭代方法  </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span><span class="comment">;i&lt;[array count];i++)  </span></span><br><span class="line">&#123;  </span><br><span class="line">     NSLog(@<span class="string">"%@"</span>,[array objectAtIndex:i])<span class="comment">;  </span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//第二种迭代方法  </span></span><br><span class="line">id ob<span class="comment">;  </span></span><br><span class="line">NSEnumerator *enumerator = [array objectEnumerator]<span class="comment">;//实现一个迭代器  </span></span><br><span class="line"><span class="keyword">while</span>(ob=[enumerator nextObject])  </span><br><span class="line">&#123;  </span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,ob)<span class="comment">;  </span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//第三种最简单的for in迭代方法  </span></span><br><span class="line">id oc<span class="comment">;  </span></span><br><span class="line"><span class="keyword">for</span> (oc in array) &#123;  </span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,oc)<span class="comment">;  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4、-property-synthesize"><a href="#4、-property-synthesize" class="headerlink" title="4、@property,@synthesize"></a>4、@property,@synthesize</h3><p>用@property,@synthesize来代替get,set方法，用起来很简单，可以省掉很多的代码量，当需要用SET，GET方法的地方，我们可以用@property,@synthesize来简单的代替，这时系统会自动给我们生成该变量的set,get方法，@property对应方法的声明部分，@synthesize对应方法的实现部分</p>
+<p>声明文件</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//这里用@<span class="keyword">property</span><span class="title"></span>表示，代表了age和height的set,get方法的声明  </span><br><span class="line">@<span class="keyword">property</span><span class="title"> </span>(readonly) int age;  </span><br><span class="line">@<span class="keyword">property</span><span class="title"> </span>float height;</span><br></pre></td></tr></table></figure>
+<p>实现文件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里用@synthesize表示age,height变量的set,get方法的实现。  </span></span><br><span class="line"><span class="variable">@synthesize</span> age;  </span><br><span class="line"><span class="variable">@synthesize</span> height;</span><br></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Human *human = [[Human <span class="keyword">alloc</span>]init]<span class="comment">;  </span></span><br><span class="line">    <span class="comment">//“.”在等号左边，相当于set方法。</span></span><br><span class="line">    human.age=<span class="number">20</span><span class="comment">; //等价于[human setAge:20]  </span></span><br><span class="line">    human.height=<span class="number">60.50</span><span class="comment">;  </span></span><br><span class="line">    <span class="comment">//“.”在等号右边，相当于get方法。  </span></span><br><span class="line">    float tmp=human.height<span class="comment">;//等价于 float tmp = [human height]  </span></span><br><span class="line">    NSLog(@<span class="string">"年龄%d,身高%f"</span>,human.age,tmp)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、点，大小，矩形，范围"><a href="#四、点，大小，矩形，范围" class="headerlink" title="四、点，大小，矩形，范围"></a>四、点，大小，矩形，范围</h2><p>图形框架</p>
+<h3 id="1、点"><a href="#1、点" class="headerlink" title="1、点"></a>1、点</h3><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CGPoint p = &#123;<span class="number">100,200</span>&#125;<span class="comment">;//CGPoint p = CGPointMake(10,20);</span></span><br><span class="line">p.x = <span class="number">300</span><span class="comment">;</span></span><br><span class="line">p.y = <span class="number">100</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2、大小"><a href="#2、大小" class="headerlink" title="2、大小"></a>2、大小</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CGSize <span class="built_in">size</span> = &#123;<span class="number">20</span>,<span class="number">10</span>&#125;;<span class="comment">//CGSize size = CGSizeMake(10,20);</span></span><br><span class="line"><span class="built_in">size</span>.<span class="built_in">width</span> = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">size</span>.<span class="built_in">height</span> = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="3、矩形"><a href="#3、矩形" class="headerlink" title="3、矩形"></a>3、矩形</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CGRect <span class="built_in">rect</span>;<span class="comment">//CGRect rect = CGRectMake(20, 20, 200, 300);</span></span><br><span class="line"><span class="built_in">rect</span>.origin.x = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">rect</span>.origin.y = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">rect</span>.<span class="built_in">size</span>.<span class="built_in">width</span> = <span class="number">200</span>;</span><br><span class="line"><span class="built_in">rect</span>.<span class="built_in">size</span>.<span class="built_in">height</span> = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="4、范围"><a href="#4、范围" class="headerlink" title="4、范围"></a>4、范围</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSRange <span class="keyword">range</span>;</span><br><span class="line"><span class="keyword">range</span>.location = <span class="number">10</span>;<span class="comment">//起始位置</span></span><br><span class="line"><span class="keyword">range</span>.length = <span class="number">10</span>;<span class="comment">//长度</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、类的学习"><a href="#五、类的学习" class="headerlink" title="五、类的学习"></a>五、类的学习</h2><p>学习类的时候，首先学习类的初始化，然后类的行为</p>
+<h3 id="1、字符串的类"><a href="#1、字符串的类" class="headerlink" title="1、字符串的类"></a>1、字符串的类</h3><p>NSString</p>
+<p>静态字符串的类</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理字符串的类</span></span><br><span class="line"><span class="built_in">NSString</span> *str3 = <span class="string">@"hello"</span>;<span class="comment">//保存静态的字符串</span></span><br><span class="line"><span class="comment">//工厂行为，类的行为</span></span><br><span class="line"><span class="comment">//把一个数字转化为字符串,通过c串创建</span></span><br><span class="line"><span class="built_in">NSString</span> *str4 = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d"</span>,<span class="number">123</span>];</span><br><span class="line"><span class="built_in">NSString</span> *str5 = [<span class="built_in">NSString</span> stringWithString:str3];<span class="comment">//</span></span><br><span class="line"><span class="built_in">NSString</span> *str6 = [<span class="built_in">NSString</span> stringWithUTF8String:<span class="string">"你好呀"</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@,%@,%@"</span>,str4,str5,str6);</span><br><span class="line">str5 = [str5 uppercaseString];<span class="comment">//小写变大写</span></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@,%@,%@"</span>,str4,str5,str6);</span><br><span class="line"><span class="comment">//判断值相等</span></span><br><span class="line"><span class="keyword">if</span> ([str3 isEqualToString:str5]) &#123;</span><br><span class="line">     <span class="built_in">NSLog</span>(<span class="string">@"相等!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//转换成整形</span></span><br><span class="line"><span class="keyword">int</span> a = [str4 intValue];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a);</span><br><span class="line"><span class="comment">//以h开头，以o结尾</span></span><br><span class="line"><span class="built_in">BOOL</span> b = [str5 hasPrefix:<span class="string">@"h"</span>];<span class="comment">//[str5 hasSuffix:@"o"]</span></span><br><span class="line"><span class="comment">//倒叙循环</span></span><br><span class="line"><span class="built_in">NSRange</span> rang = &#123;<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> i = str5.length - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">    rang.location = i;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[str5 substringWithRange:rang]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写入文件</span></span><br><span class="line">[str6 writeToFile:<span class="string">@"abc.txt"</span> atomically:<span class="literal">YES</span> encoding:<span class="built_in">NSUTF8StringEncoding</span> error:<span class="literal">nil</span>];</span><br><span class="line"><span class="comment">//读取文件,文件不存在时，返回的是null</span></span><br><span class="line"><span class="built_in">NSError</span> *nse;</span><br><span class="line"><span class="built_in">NSString</span> *str7 = [<span class="built_in">NSString</span> stringWithContentsOfFile:<span class="string">@"abc.txt"</span> encoding:<span class="built_in">NSUTF8StringEncoding</span> error:&amp;nse];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,str7);</span><br><span class="line"><span class="comment">//可以打印错误信息</span></span><br></pre></td></tr></table></figure>
+<p>NSMutableString</p>
+<p>动态的字符串</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不超过100的字符串</span></span><br><span class="line">NSMutableString * <span class="keyword">s</span> = [NSMutableString stringWithCapacity:<span class="number">100</span>]<span class="comment">;</span></span><br><span class="line">[<span class="keyword">s</span> appendString:str4]<span class="comment">;</span></span><br><span class="line">[<span class="keyword">s</span> appendFormat:@<span class="string">"%d"</span>,<span class="number">123</span>]<span class="comment">;</span></span><br><span class="line">[<span class="keyword">s</span> appendString:str6]<span class="comment">;</span></span><br><span class="line">NSRange <span class="keyword">r</span>=&#123;<span class="number">0</span>,<span class="number">2</span>&#125;<span class="comment">;</span></span><br><span class="line"><span class="comment">//替换字符串</span></span><br><span class="line">[<span class="keyword">s</span> replaceCharactersInRange:<span class="keyword">r</span> withString:@<span class="string">"hahaha"</span>]<span class="comment">;</span></span><br><span class="line">NSLog(@<span class="string">"%@"</span>,<span class="keyword">s</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2、数组类"><a href="#2、数组类" class="headerlink" title="2、数组类"></a>2、数组类</h3><p>NSArray</p>
+<p>静态的数组</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态数组，只能保存对象型的数据</span></span><br><span class="line">NSArray * array = @[@<span class="string">"1"</span>,@<span class="string">"2"</span>,@<span class="string">"3"</span>]<span class="comment">;</span></span><br><span class="line">NSLog(@<span class="string">"%ld"</span>,[array count])<span class="comment">;</span></span><br><span class="line"><span class="comment">//for循环遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span><span class="comment">; i&lt; [array count]; i++) &#123;</span></span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,<span class="comment">/*[array objectAtIndex:i]*/</span> array[i])<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//for in循环</span></span><br><span class="line"><span class="keyword">for</span> (NSString *<span class="keyword">str</span> in array) &#123;</span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,<span class="keyword">str</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>动态的数组</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态数组</span></span><br><span class="line">NSMutableArray * array2 = [NSMutableArray arrayWithCapacity:<span class="number">20</span>]<span class="comment">;</span></span><br><span class="line">[array2 addObject:@<span class="string">"323"</span>]<span class="comment">;</span></span><br><span class="line">[array2 addObject:@<span class="string">"56"</span>]<span class="comment">;</span></span><br><span class="line">[array2 addObject:@<span class="string">"009"</span>]<span class="comment">;</span></span><br><span class="line">[array2 removeObject:@<span class="string">"56"</span>]<span class="comment">;//删除指定的</span></span><br><span class="line">[array2 removeLastObject]<span class="comment">;//删除最后一个</span></span><br><span class="line"><span class="keyword">for</span> (NSString *<span class="keyword">str</span> in array2) &#123;</span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,<span class="keyword">str</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3、集合类"><a href="#3、集合类" class="headerlink" title="3、集合类"></a>3、集合类</h3><p>静态集合</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//里面存放的内容不可重复</span></span><br><span class="line"><span class="built_in">NSSet</span> * set = [<span class="built_in">NSSet</span> setWithObjects:<span class="string">@"1"</span>,<span class="string">@"2"</span>,<span class="string">@"3"</span>,<span class="string">@"2"</span>, <span class="literal">nil</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> *str <span class="keyword">in</span> set) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,str);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//排序</span></span><br><span class="line"><span class="built_in">NSArray</span> *arr = [set allObjects];</span><br><span class="line">arr = [arr sortedArrayUsingSelector:<span class="keyword">@selector</span>(compare:)];</span><br></pre></td></tr></table></figure>
+<p>动态集合</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSMutableSet * <span class="built_in">set</span> = [NSMutableSet <span class="built_in">set</span>WithCapacity:20];</span><br><span class="line">[<span class="built_in">set</span> addObject:@<span class="string">"1"</span>];</span><br><span class="line">[<span class="built_in">set</span> addObject:@<span class="string">"2"</span>];</span><br><span class="line">[<span class="built_in">set</span> addObject:@<span class="string">"3"</span>];</span><br><span class="line">[<span class="built_in">set</span> removeObject:@<span class="string">"1"</span>];</span><br><span class="line"><span class="keyword">for</span> (NSString *str <span class="keyword">in</span> <span class="built_in">set</span>) &#123;</span><br><span class="line">    NSLog(@<span class="string">"%@"</span>,str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4、字典"><a href="#4、字典" class="headerlink" title="4、字典"></a>4、字典</h3><p>键值对，类似java的map吧</p>
+<p>静态字典</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//字典</span><br><span class="line">NSDictionary <span class="keyword">*</span>d = <span class="meta">@&#123;</span><span class="meta">@"1":</span><span class="meta">@"111",</span><span class="meta">@"2":</span><span class="meta">@"222"&#125;;</span></span><br><span class="line">//d = [NSDictionary dictionaryWithObjectsAndKeys:<span class="meta">@"李四",</span><span class="meta">@"1",</span><span class="meta">@"张三",</span><span class="meta">@"2",</span> nil];</span><br><span class="line">NSArray <span class="keyword">*</span> keys = [d allKeys];</span><br><span class="line">for (NSString <span class="keyword">*</span>key in keys) &#123;</span><br><span class="line">    NSLog(<span class="meta">@"%</span><span class="meta">@:%</span><span class="meta">@",key,[d</span> valueForKey:key]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>动态字典</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//动态字典</span></span><br><span class="line"><span class="comment">//创建20个空间</span></span><br><span class="line">NSMutableDictionary * d = [[NSMutableDictionary alloc]<span class="string">initWithCapacity:</span><span class="number">20</span>];</span><br><span class="line">[d <span class="string">setObject:</span>@<span class="string">"李四"</span> <span class="string">forKey:</span>@<span class="string">"1"</span>];</span><br><span class="line">[d <span class="string">setObject:</span>@<span class="string">"张三"</span> <span class="string">forKey:</span>@<span class="string">"2"</span>];</span><br><span class="line">NSArray * keys = [d allKeys];</span><br><span class="line"><span class="keyword">for</span> (NSString *key <span class="keyword">in</span> keys) &#123;</span><br><span class="line">    NSLog(@<span class="string">"%@:%@"</span>,key,[d <span class="string">valueForKey:</span>key]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  ​</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/27/hexo-github搭建博客遇到的坑/" rel="next" title="hexo+github搭建博客遇到的坑">
+                <i class="fa fa-chevron-left"></i> hexo+github搭建博客遇到的坑
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/03/ios2/" rel="prev" title="iOS学习笔记二">
+                iOS学习笔记二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/30/ios1/"
+           data-title="iOS学习笔记一" data-url="http://blog.honge.me/2015/08/30/ios1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、IOS开发环境的搭建"><span class="nav-number">1.</span> <span class="nav-text">一、IOS开发环境的搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、C语言学习"><span class="nav-number">2.</span> <span class="nav-text">二、C语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、新建OSX命令行工程"><span class="nav-number">2.1.</span> <span class="nav-text">1、新建OSX命令行工程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Objectiver-C语言学习"><span class="nav-number">3.</span> <span class="nav-text">三、Objectiver C语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、新建OC工程"><span class="nav-number">3.1.</span> <span class="nav-text">1、新建OC工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、基本"><span class="nav-number">3.2.</span> <span class="nav-text">2、基本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、OC里面的字符串"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、OC里面的字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、OC中新增的变量"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、OC中新增的变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、类"><span class="nav-number">3.3.</span> <span class="nav-text">3、类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、定义类"><span class="nav-number">3.3.1.</span> <span class="nav-text">1、定义类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、应用类"><span class="nav-number">3.3.2.</span> <span class="nav-text">2、应用类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、类的继承"><span class="nav-number">3.3.3.</span> <span class="nav-text">3、类的继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#init方法"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">init方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重写父类init方法"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">重写父类init方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、NSArray类"><span class="nav-number">3.3.4.</span> <span class="nav-text">4、NSArray类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本使用"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSArray存放的数据"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">NSArray存放的数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#迭代输出"><span class="nav-number">3.3.4.3.</span> <span class="nav-text">迭代输出</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-property-synthesize"><span class="nav-number">3.4.</span> <span class="nav-text">4、@property,@synthesize</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、点，大小，矩形，范围"><span class="nav-number">4.</span> <span class="nav-text">四、点，大小，矩形，范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、点"><span class="nav-number">4.1.</span> <span class="nav-text">1、点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、大小"><span class="nav-number">4.2.</span> <span class="nav-text">2、大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、矩形"><span class="nav-number">4.3.</span> <span class="nav-text">3、矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、范围"><span class="nav-number">4.4.</span> <span class="nav-text">4、范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、类的学习"><span class="nav-number">5.</span> <span class="nav-text">五、类的学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、字符串的类"><span class="nav-number">5.1.</span> <span class="nav-text">1、字符串的类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、数组类"><span class="nav-number">5.2.</span> <span class="nav-text">2、数组类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、集合类"><span class="nav-number">5.3.</span> <span class="nav-text">3、集合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、字典"><span class="nav-number">5.4.</span> <span class="nav-text">4、字典</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

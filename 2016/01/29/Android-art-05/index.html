@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="第五章理解RemoteViewsRemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。
+RemoteViews的应用主要用在通知栏和桌面小部件。
+RemoteViews在通知栏的应用普通通知栏的使用1234567891011121314151617Notificat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索读书笔记：五">
+<meta property="og:url" content="http://blog.honge.me/2016/01/29/Android-art-05/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="第五章理解RemoteViewsRemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。
+RemoteViews的应用主要用在通知栏和桌面小部件。
+RemoteViews在通知栏的应用普通通知栏的使用1234567891011121314151617Notificat">
+<meta property="og:updated_time" content="2016-03-31T03:59:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索读书笔记：五">
+<meta name="twitter:description" content="第五章理解RemoteViewsRemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。
+RemoteViews的应用主要用在通知栏和桌面小部件。
+RemoteViews在通知栏的应用普通通知栏的使用1234567891011121314151617Notificat">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> Android开发艺术探索读书笔记：五 | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android开发艺术探索读书笔记：五
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-29T11:15:33+08:00" content="2016-01-29">
+              2016-01-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/29/Android-art-05/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/29/Android-art-05/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><p>理解RemoteViews<br>RemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。</p>
+<h3 id="RemoteViews的应用"><a href="#RemoteViews的应用" class="headerlink" title="RemoteViews的应用"></a>RemoteViews的应用</h3><p>主要用在通知栏和桌面小部件。</p>
+<h4 id="RemoteViews在通知栏的应用"><a href="#RemoteViews在通知栏的应用" class="headerlink" title="RemoteViews在通知栏的应用"></a>RemoteViews在通知栏的应用</h4><p>普通通知栏的使用<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFI<span class="built_in">CATION_SERVICE</span>);</span><br><span class="line"></span><br><span class="line">NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(<span class="keyword">this</span>);</span><br><span class="line">mBuilder.setContentTitle(name)<span class="comment">//设置通知栏标题</span></span><br><span class="line">        .setContentText(content) <span class="comment">//设置通知栏显示内容&lt;/span&gt;</span></span><br><span class="line">        .setContentIntent(getDefalutIntent(Notification.FLAG_AUTO_CANCEL,uin)) <span class="comment">//设置通知栏点击意图</span></span><br><span class="line"> 		.setNumber(number) <span class="comment">//设置通知集合的数量</span></span><br><span class="line">        .setTicker(<span class="string">"您有一条新消息"</span>) <span class="comment">//通知首次出现在通知栏，带上升动画效果的</span></span><br><span class="line">        .setWhen(System.currentTimeMillis())<span class="comment">//通知产生的时间，会在通知信息里显示，一般是系统获取到的时间</span></span><br><span class="line">        .setPriority(Notification.PRIORITY_DEFAULT) <span class="comment">//设置该通知优先级</span></span><br><span class="line">		.setAutoCancel(<span class="literal">true</span>)<span class="comment">//设置这个标志当用户单击面板就可以让通知将自动取消</span></span><br><span class="line">        .setOngoing(<span class="literal">false</span>)<span class="comment">//ture，设置他为一个正在进行的通知。他们通常是用来表示一个后台任务,用户积极参与(如播放音乐)或以某种方式正在等待,因此占用设备(如一个文件下载,同步操作,主动网络连接)</span></span><br><span class="line">        .setDefaults(Notification.DEFAULT_VIBRATE)<span class="comment">//向通知添加声音、闪灯和振动效果的最简单、最一致的方式是使用当前的用户默认设置，使用defaults属性，可以组合</span></span><br><span class="line">                <span class="comment">//Notification.DEFAULT_ALL  Notification.DEFAULT_SOUND 添加声音 // requires VIBRATE permission</span></span><br><span class="line">        .setSmallIcon(R.drawable.ic_launcher);<span class="comment">//设置通知小ICON</span></span><br><span class="line"></span><br><span class="line">mNotificationManager.notify(tag ,<span class="keyword">id</span>, mBuilder.build());</span><br></pre></td></tr></table></figure></p>
+<p>使用RemoteViews实现的自定义通知界面<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">NotificationCompat.<span class="keyword">Builder </span><span class="keyword">builder </span>= new NotificationCompat.<span class="keyword">Builder(this);</span><br><span class="line"></span>Notification notification = <span class="keyword">builder</span><br><span class="line"></span>        .setSmallIcon(R.drawable.ic_launcher)</span><br><span class="line">        .setTicker(<span class="string">"hello"</span>)</span><br><span class="line">        .setWhen(System.currentTimeMillis())</span><br><span class="line">        .<span class="keyword">build();</span><br><span class="line"></span>notification.flags = Notification.FLAG_AUTO_CANCEL<span class="comment">;</span></span><br><span class="line">Intent intent = new Intent(this,MainActivity.class)<span class="comment">;</span></span><br><span class="line">PendingIntent pendingIntent = PendingIntent.getActivity(this,<span class="number">0</span>,intent,PendingIntent.FLAG_UPDATE_CURRENT)<span class="comment">;</span></span><br><span class="line">RemoteViews remoteViews = new RemoteViews(getPackageName(),R.layout.msglayout)<span class="comment">;</span></span><br><span class="line">remoteViews.setTextViewText(R.id.tvMsg,<span class="string">"信息"</span>)<span class="comment">;</span></span><br><span class="line">remoteViews.setImageViewResource(R.id.ivImage, R.drawable.ic_launcher)<span class="comment">;</span></span><br><span class="line">PendingIntent pendingIntent2 = PendingIntent.getActivity(this,<span class="number">0</span>,intent,PendingIntent.FLAG_UPDATE_CURRENT)<span class="comment">;</span></span><br><span class="line">remoteViews.setOnClickPendingIntent(R.id.ivImage,pendingIntent2)<span class="comment">;</span></span><br><span class="line">notification.contentView = remoteViews<span class="comment">;</span></span><br><span class="line">notification.contentIntent = pendingIntent<span class="comment">;</span></span><br><span class="line">NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE)<span class="comment">;</span></span><br><span class="line">manager.notify(<span class="number">1</span>,notification)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="RemoteViews在桌面小部件上的应用"><a href="#RemoteViews在桌面小部件上的应用" class="headerlink" title="RemoteViews在桌面小部件上的应用"></a>RemoteViews在桌面小部件上的应用</h4><ol>
+<li>先新建布局 widget.xml</li>
+<li><p>在res/xml 下新建widget_info.xml声明</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="tag">&lt;<span class="name">appwidget-provider</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:initialLayout</span>=<span class="string">"@layout/widget"</span></span><br><span class="line">    <span class="attr">android:updatePeriodMillis</span>=<span class="string">"86400000"</span></span><br><span class="line">    <span class="attr">android:minWidth</span>=<span class="string">"80dp"</span></span><br><span class="line">    <span class="attr">android:minHeight</span>=<span class="string">"80dp"</span></span><br><span class="line">    /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义小部件实现类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAppWidgetProvider</span> <span class="keyword">extends</span> <span class="title">AppWidgetProvider</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void onReceive(<span class="type">Context</span> context, <span class="type">Intent</span> intent) &#123;</span><br><span class="line">        <span class="keyword">super</span>.onReceive(context, intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    public void onUpdate(<span class="type">Context</span> context, <span class="type">AppWidgetManager</span> appWidgetManager, int[] appWidgetIds) &#123;</span><br><span class="line">        <span class="keyword">super</span>.onUpdate(context, appWidgetManager, appWidgetIds);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在AndroidManiFest中注册</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyAppWidgetProvider"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">"android.appwidget.provider"</span></span><br><span class="line">        <span class="attr">android:resource</span>=<span class="string">"@xml/widget_info"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">meta-data</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.appwidget.action.APPIDGET_UPDATE"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>AppWidgetProider会自动根据广播的action通过onReceive方法来自动分发广播，调用以下方法</p>
+<ol>
+<li>onEnable<br> 当widget第一次添加到桌面上的时候会调用。</li>
+<li>onUpdate<br> 小部件被添加时或者小部件更新时都会调用，updatePeriodMillis表示更新周期。</li>
+<li>onDelete<br> 每删除一次小部件就会调用一次</li>
+<li>onDisable<br> 当最后一个小部件被删除时调用</li>
+<li>onReceive<br> 广播的内置方法，用于分发具体事件给其他方法</li>
+</ol>
+<h4 id="PendingIntent概述"><a href="#PendingIntent概述" class="headerlink" title="PendingIntent概述"></a>PendingIntent概述</h4><p>PendingIntent表示一种待定、等待、即将发生状态的意图。<br>PendingIntent的匹配规则：如果两个PendingIntent他们内部的Intent相同并且requestCode也相同，那么这两个PendingIntent也是相同的；<br>Intent的匹配规则：如果两个Intent的ComponentName和intent-filter都相同，那么这两个Intent时相同的。</p>
+<p>支持三种特定意图<br>启动Activity，启动Service和发送广播，getActivity，getService，getBroadCast<br>方法中的<br>第二个参数requestCode表示PendingIntent发送方的请求码，多数情况下设置为0即可，requestCode会影响到flags的效果；<br>第四个参数flags常见的类型有</p>
+<ol>
+<li>FLAG_ONE_SHOT<br> 当前描述的的PendingIntent只能被使用一次，然后它就会被自动cancel，如果后续还有相同的PendingIntent，那么他们的send方法就会调用失败。</li>
+<li>FLAG_NO_CREATE<br> 当前描述的PendingIntent不会主动创建，如果当前PendingIntent之前不存在，那么getActivity、getService和getBoardCast都返回null，即获取PendingIntent失败。</li>
+<li>FLAG_CANCEL_CURRENT<br> 当前描述的PengingIntent如果已经存在，那么他们都会被cancel，然后系统会统一创建一个新的PendingIntent。</li>
+<li>FLAG_UPDATE_CURRENT<br> 当前描述的PendingIntent如果已经存在，那么他们都会被更新，即Intent中的Extras会被更新。</li>
+</ol>
+<p>以通知栏为例子<br>manger.notify(id,notification);<br>如果每次id相同，不管PendingIntent怎么匹配，后面的通知会直接替换前面的通知；<br>如果每次id不同，那么当PendingIntent不匹配时，不管采用何种标记位，这些通知直接也是互相不干扰的；如果PendingIntent处于匹配状态时，如果采用了FLAG_ONE_SHOT标记位，那么后续通知中的PendingIntent会和第一天通知保持完全一致，包括里面的Extras，单击任何一条通知后，其他的通知将无法再打开，当所有的通知被清除后，会重复这个过程；如果采用FLAG_CANCEL_CURRENT标记位，那么只有最新的通知可以打开；如果采用FLAG_UPDATE_CURRENT，那么之前弹出的通知中的PendingIntent和最新的完全一致，包括里面的Extras，并且都是可以打开的。</p>
+<h3 id="RemoteViews的内部机制"><a href="#RemoteViews的内部机制" class="headerlink" title="RemoteViews的内部机制"></a>RemoteViews的内部机制</h3><p>RemoteViews只支持特定的View，除这些外，不支持其他的View<br><code>FrameLayout</code>、<code>LinearLayout</code>、<code>RelativeLayout</code>、<code>GridLayout</code>、<code>AnalogClock</code>、<code>Button</code>、<code>Chronoment</code>、<code>ImageButton</code>、<code>ImageView</code>、<code>ProgressBar</code>、<code>TextView</code>、<code>ViewFilpper</code>、<code>ListView</code>、<code>GridView</code>、<code>StackView</code>、<code>AdapterViewFilpper</code>、<code>ViewStub</code></p>
+<p>桌面小部件和通知栏分别由AppWidgetManager和NotificiationManager管理，而AppWidgetManager和NotificiationManager通过Binder分别和SystemServer进程中的AppWidgetServer 和 NotificiationManagerServer进行通信。<br>首先RemoteViews会通过Binder传递到SystemServer进程，系统会根据RemoteViews中的包名等信息去获取到应用的资源。然后通过LayoutInflater去加载RemoteViews中的布局文件。接着系统会对View执行一系列界面更新任务，即之前的set方法设置的一些数据。当需要更新RemoteViews的时候是通过NotificiationManager和AppWidgetManager来提交更新的。</p>
+<h3 id="RemoteViews的意义"><a href="#RemoteViews的意义" class="headerlink" title="RemoteViews的意义"></a>RemoteViews的意义</h3><p>可以使用RemoteViews来实现跨进程应用的UI更新。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/27/Android-goods/" rel="next" title="一些Android的优秀文章">
+                <i class="fa fa-chevron-left"></i> 一些Android的优秀文章
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/01/Android-art-06/" rel="prev" title="Android开发艺术探索读书笔记：六">
+                Android开发艺术探索读书笔记：六 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/29/Android-art-05/"
+           data-title="Android开发艺术探索读书笔记：五" data-url="http://blog.honge.me/2016/01/29/Android-art-05/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章"><span class="nav-number">1.</span> <span class="nav-text">第五章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RemoteViews的应用"><span class="nav-number">1.1.</span> <span class="nav-text">RemoteViews的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RemoteViews在通知栏的应用"><span class="nav-number">1.1.1.</span> <span class="nav-text">RemoteViews在通知栏的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RemoteViews在桌面小部件上的应用"><span class="nav-number">1.1.2.</span> <span class="nav-text">RemoteViews在桌面小部件上的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PendingIntent概述"><span class="nav-number">1.1.3.</span> <span class="nav-text">PendingIntent概述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RemoteViews的内部机制"><span class="nav-number">1.2.</span> <span class="nav-text">RemoteViews的内部机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RemoteViews的意义"><span class="nav-number">1.3.</span> <span class="nav-text">RemoteViews的意义</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

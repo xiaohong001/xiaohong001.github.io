@@ -1,0 +1,951 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,tips," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Honge的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Android Studio配置签名生成keystore文件keystore.jks需放到app文件夹下123456789101112131415161718192021222324sourceSets &amp;#123;    main &amp;#123;        aidl.srcDirs = [&apos;src/main/java&apos;]        jniLibs.srcDirs = [&apos;libs&apos;]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android-tips">
+<meta property="og:url" content="http://blog.honge.me/2015/11/03/Android-tips/index.html">
+<meta property="og:site_name" content="Honge的博客">
+<meta property="og:description" content="Android Studio配置签名生成keystore文件keystore.jks需放到app文件夹下123456789101112131415161718192021222324sourceSets &amp;#123;    main &amp;#123;        aidl.srcDirs = [&apos;src/main/java&apos;]        jniLibs.srcDirs = [&apos;libs&apos;]">
+<meta property="og:image" content="http://img.blog.csdn.net/20150910152138215">
+<meta property="og:updated_time" content="2016-03-31T08:39:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android-tips">
+<meta name="twitter:description" content="Android Studio配置签名生成keystore文件keystore.jks需放到app文件夹下123456789101112131415161718192021222324sourceSets &amp;#123;    main &amp;#123;        aidl.srcDirs = [&apos;src/main/java&apos;]        jniLibs.srcDirs = [&apos;libs&apos;]">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150910152138215">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 13320694,
+      author: 'ROOT'
+    }
+  };
+</script>
+
+  <title> Android-tips | Honge的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72406866-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta custom-logo">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honge的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools" rel="section">
+            
+              <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-commenting fa-fw"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4pMn7e9HHRCrMqxx4Ab7','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android-tips
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-03T09:35:59+08:00" content="2015-11-03">
+              2015-11-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/tips/" itemprop="url" rel="index">
+                    <span itemprop="name">tips</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/03/Android-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/Android-tips/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Android-Studio配置签名"><a href="#Android-Studio配置签名" class="headerlink" title="Android Studio配置签名"></a>Android Studio配置签名</h2><p>生成keystore文件<br><img src="http://img.blog.csdn.net/20150910152138215" alt="alt 图解"><br>keystore.jks需放到app文件夹下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">    main &#123;</span><br><span class="line">        aidl<span class="selector-class">.srcDirs</span> = [<span class="string">'src/main/java'</span>]</span><br><span class="line">        jniLibs<span class="selector-class">.srcDirs</span> = [<span class="string">'libs'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">signingConfigs &#123;</span><br><span class="line">    releaseConfig &#123;</span><br><span class="line">        keyAlias <span class="string">'name'</span></span><br><span class="line">        keyPassword <span class="string">'pas'</span></span><br><span class="line">        storeFile file(<span class="string">'./keystore.jks'</span>)</span><br><span class="line">        storePassword <span class="string">'pas'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">buildTypes &#123;</span><br><span class="line">    release &#123;</span><br><span class="line">        ...</span><br><span class="line">        signingConfig signingConfigs<span class="selector-class">.releaseConfig</span></span><br><span class="line">    &#125;</span><br><span class="line">    debug &#123;</span><br><span class="line">        signingConfig signingConfigs<span class="selector-class">.releaseConfig</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="需要byte数组中有String又有二进制文件的处理方式"><a href="#需要byte数组中有String又有二进制文件的处理方式" class="headerlink" title="需要byte数组中有String又有二进制文件的处理方式"></a>需要byte数组中有String又有二进制文件的处理方式</h2><p>先把二进制文件转成hex的String，然后和String拼接在一起，转成byte数组<br>取出的时候，先将byte数组转成String，对String进行分离，将hex的转成byte数组，然后保存</p>
+<h2 id="在Service中弹出dialog"><a href="#在Service中弹出dialog" class="headerlink" title="在Service中弹出dialog"></a>在Service中弹出dialog</h2><p>显示一个系统界别的dialog，即全局性质的dialog。这种dialog在任何界面下都可以弹出来。但是，这种dialog不相应home键和返回键，即强制用户必须对dialog作出操作后。<br>需要权限<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:<span class="built_in">name</span>=<span class="string">"android.permission.SYSTEM_ALERT_WINDOW"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>代码编辑<br><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dialog</span> = new AlertDialog.Builder(getApplicationContext())</span><br><span class="line">                    .setCancelable(false)</span><br><span class="line">                    .setMessage(msgContent)</span><br><span class="line">                    .create()<span class="comment">;</span></span><br><span class="line"><span class="comment">//在这里声明是系统级的Dialog</span></span><br><span class="line"><span class="keyword">dialog</span>.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)<span class="comment">;</span></span><br><span class="line"><span class="keyword">dialog</span>.show()<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="aidl中要使用另外实体类的时候"><a href="#aidl中要使用另外实体类的时候" class="headerlink" title="aidl中要使用另外实体类的时候"></a>aidl中要使用另外实体类的时候</h2><p>先建Test.aidl<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">package com.honge.<span class="keyword">test</span>;<span class="comment">//一定要加上包名</span></span><br><span class="line">parcelable <span class="keyword">Test</span>;</span><br></pre></td></tr></table></figure></p>
+<p>然后建Test.java<br><figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">implements</span> <span class="title">Parcelable</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="aidi中需要使用的类不加包名时"><a href="#aidi中需要使用的类不加包名时" class="headerlink" title="aidi中需要使用的类不加包名时"></a>aidi中需要使用的类不加包名时</h2><p>项目要求用qq物联网的sdk，官方demo在Eclipse下能编译通过，移植到AndroidStudio中却一直报错<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error:Execution failed <span class="keyword">for</span> task <span class="string">':app:compileDebugAidl'</span>.</span><br><span class="line">&gt; com<span class="selector-class">.android</span><span class="selector-class">.ide</span><span class="selector-class">.common</span><span class="selector-class">.process</span><span class="selector-class">.ProcessException</span>: org<span class="selector-class">.gradle</span><span class="selector-class">.process</span><span class="selector-class">.internal</span><span class="selector-class">.ExecException</span>: Process <span class="string">'command '</span>/Users/hong/Library/Android/sdk/build-tools/<span class="number">23.0</span>.<span class="number">2</span>/aidl<span class="string">''</span> finished with non-zero exit value <span class="number">139</span></span><br></pre></td></tr></table></figure></p>
+<p>出现这个问题是因为<br><code>在ITXDeviceService.aidl中使用到了的TXDataPoint.aidl文件中没有声明包名信息</code><br>不知道为什么在Eclipse没有问题</p>
+<h2 id="INSTALL-FAILED-UID-CHANGED"><a href="#INSTALL-FAILED-UID-CHANGED" class="headerlink" title="INSTALL_FAILED_UID_CHANGED"></a>INSTALL_FAILED_UID_CHANGED</h2><p>QQ物联网SDK安装后卸载，再次安装会出现错误<br><code>Installation error: INSTALL_FAILED_UID_CHANGED</code><br>经检查，在data/data文件夹下，demo的包文件夹没有删除，真不懂QQ是怎么做到的，这么叼</p>
+<h2 id="eventbus-在remote-service中会发送失败"><a href="#eventbus-在remote-service中会发送失败" class="headerlink" title="eventbus 在remote service中会发送失败"></a>eventbus 在remote service中会发送失败</h2><p>eventbus 在remote service中会发送失败</p>
+<h2 id="Android-Studio-插件"><a href="#Android-Studio-插件" class="headerlink" title="Android Studio 插件"></a>Android Studio 插件</h2><h4 id="Android-Studio-Prettify"><a href="#Android-Studio-Prettify" class="headerlink" title="Android Studio Prettify"></a>Android Studio Prettify</h4><pre><code>一个自动findviewbyid的插件
+</code></pre><h4 id="Android-Parcelable-code-Generator"><a href="#Android-Parcelable-code-Generator" class="headerlink" title="Android Parcelable code Generator"></a>Android Parcelable code Generator</h4><pre><code>一个序列化Parcelable的插件
+</code></pre><h2 id="开机启动一个没有界面的Service"><a href="#开机启动一个没有界面的Service" class="headerlink" title="开机启动一个没有界面的Service"></a>开机启动一个没有界面的Service</h2><h3 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h3><p>1、监听开机广播，在接收到后启动service，由于一收到开机广播后，有些系统功能还没加载出来，需延迟启动<br>2、导出未签名的apk，使用Android源码中的<br>/out/host/linux-x86/framework/signapk.jar<br>/platform/build/target/product/security/platform.pk8<br>/platform/build/target/product/security/platform.x509.pem<br>进行签名<br><code>java -jar signapk.jar platform.x509.pem platform.pk8 unsigned.apk signed.apk</code><br>3、将signed.apk 放到/system/app目录下<br>4、将jinlib拷贝到/system/lib目录下</p>
+<h3 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h3><ol>
+<li>首先在vendor目录下新建一个the3rdapk的目录，将需要内置的apk丢进去，目录名自己随意定。</li>
+<li><p>在 build/target/product/common.mk最后面，在$(call inherit-product, $(SRC_TARGET_DIR)/product/core.mk) 之前加入你的apk<br>第一部分是是本地apk的路径，/system/app/表示复制到system image的相关目录。<br>如果没有第二部分，则会出现以下编译错误：<br>build/core/product_config.mk:227: <em>*</em> build/target/product/full.mk: malformed COPY_FILE “vendor/the3rdapk/FeiLiao_Android_1.6.1.apk”.  Stop.<br>[html] view plaincopy<br>#andy@2012.9.19,基于源代码方式内置 salemanager<br>PRODUCT_PACKAGES += SaleManager  </p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#andy@2012.9.19,直接内置第三方apk,add for vendor apks  </span></span><br><span class="line">PRODUCT_COPY_FILES +=vendor<span class="meta-keyword">/the3rdapk/</span>FeiLiao_Android_1<span class="number">.6</span><span class="number">.1</span>.apk:<span class="meta-keyword">/system/</span>app/FeiLiao_Android_1<span class="number">.6</span><span class="number">.1</span>.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>Mcontact_android_1<span class="number">.1</span><span class="number">.1</span>.apk:<span class="meta-keyword">/system/</span>app/Mcontact_android_1<span class="number">.1</span><span class="number">.1</span>.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>MM_online_channel.apk:<span class="meta-keyword">/system/</span>app/MM_online_channel.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>fetion_android.apk:<span class="meta-keyword">/system/</span>app/fetion_android.apk  </span><br><span class="line">  </span><br><span class="line">$(call inherit-product, $(SRC_TARGET_DIR)<span class="meta-keyword">/product/</span>core.mk)  </span><br><span class="line">[html] view plaincopy</span><br><span class="line"><span class="meta">#andy@2012.9.19,基于源代码方式内置 salemanager   </span></span><br><span class="line">PRODUCT_PACKAGES += SaleManager  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#andy@2012.9.19,直接内置第三方apk,add for vendor apks  </span></span><br><span class="line">PRODUCT_COPY_FILES +=vendor<span class="meta-keyword">/the3rdapk/</span>FeiLiao_Android_1<span class="number">.6</span><span class="number">.1</span>.apk:<span class="meta-keyword">/system/</span>app/FeiLiao_Android_1<span class="number">.6</span><span class="number">.1</span>.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>Mcontact_android_1<span class="number">.1</span><span class="number">.1</span>.apk:<span class="meta-keyword">/system/</span>app/Mcontact_android_1<span class="number">.1</span><span class="number">.1</span>.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>MM_online_channel.apk:<span class="meta-keyword">/system/</span>app/MM_online_channel.apk\  </span><br><span class="line">    vendor<span class="meta-keyword">/the3rdapk/</span>fetion_android.apk:<span class="meta-keyword">/system/</span>app/fetion_android.apk  </span><br><span class="line">  </span><br><span class="line">$(call inherit-product, $(SRC_TARGET_DIR)<span class="meta-keyword">/product/</span>core.mk)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果有.so文件，则相应的复制到 /system/lib/目录下，格式如上文。<br>基于源代码编译的方式内置参见另外一篇文章：<br><a href="http://blog.csdn.net/annkie/article/details/7995975" target="_blank" rel="external">Android:源码环境编译自定义的APP到ROM(System Image)中</a></p>
+</li>
+</ol>
+<h2 id="Android-5-0以上不能使用隐式启动Service"><a href="#Android-5-0以上不能使用隐式启动Service" class="headerlink" title="Android 5.0以上不能使用隐式启动Service"></a>Android 5.0以上不能使用隐式启动Service</h2><p><a href="/2015/12/09/android-IntentService/">具体可看</a>;</p>
+<h2 id="setOnTouchListener时ACTION-UP不触发的情况"><a href="#setOnTouchListener时ACTION-UP不触发的情况" class="headerlink" title="setOnTouchListener时ACTION_UP不触发的情况"></a>setOnTouchListener时ACTION_UP不触发的情况</h2><p>当手指按下后立刻离开，只触发了ACTION_DOWN，没有触发ACTION_UP，就会导致，按钮按下的逻辑代码一直会执行。当焦点移动到件之外，此时会触发ACTION_CANCEL，而不是ACTION_UP，造成按下的逻辑一直会执行。</p>
+<h2 id="扫描指定文件夹"><a href="#扫描指定文件夹" class="headerlink" title="扫描指定文件夹"></a>扫描指定文件夹</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) &#123;</span><br><span class="line">    Intent mediaScanIntent = <span class="keyword">new</span> Intent(</span><br><span class="line">            Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);</span><br><span class="line">    <span class="built_in">Uri</span> contentUri = <span class="built_in">Uri</span>.fromFile(out); \\out <span class="keyword">is</span> your output file</span><br><span class="line">    mediaScanIntent.setData(contentUri);</span><br><span class="line">    <span class="keyword">this</span>.sendBroadcast(mediaScanIntent);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    sendBroadcast(<span class="keyword">new</span> Intent(</span><br><span class="line">            Intent.ACTION_MEDIA_MOUNTED,</span><br><span class="line">            <span class="built_in">Uri</span>.parse(<span class="string">"file://"</span></span><br><span class="line">                    - Environment.getExternalStorageDirectory())));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SimpleCursorAdapter"><a href="#SimpleCursorAdapter" class="headerlink" title="SimpleCursorAdapter"></a>SimpleCursorAdapter</h2><p>在高版本中编译是默认开启的<br> 在Android中，数据的展示都需要使用一个Adapter适配器，而Loader一般返回的就是一个Cursor的数据，可以使用BaseAdapter的一个子类SimpleCursorAdapter，它可以使用XML资源文件自定义一个布局在展示数据。它有两个构造函数，但是有一个构造函数在API Level11之后就不推荐使用。下面是构造函数的签名：<br>      SimpleCursorAdapter(Context context,int layout,Cursor c,String[] from,int[] to,int flags).<br>      最后一个参数flags是一个标识，标识当数据改变调用onContentChanged()的时候，是否通知ContentProvider数据的改变，如果无需监听ContentProvider的改变，则可以传0。对于SimpleCursorAdapter适配器的Cursor的改变，可以使用SimpleCursorAdapter.swapCursor(Cursor)方法，它会与旧的Cursor互换，并且返回旧的Cursor。</p>
+<h2 id="Android-Studio-使用过程中会出现-no-debuggable-applications的情况，原因是没有设置的debuggable。"><a href="#Android-Studio-使用过程中会出现-no-debuggable-applications的情况，原因是没有设置的debuggable。" class="headerlink" title="Android Studio 使用过程中会出现 no debuggable applications的情况，原因是没有设置的debuggable。"></a>Android Studio 使用过程中会出现 no debuggable applications的情况，原因是没有设置的debuggable。</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">buildTypes</span> &#123;</span><br><span class="line">    <span class="section">release</span> &#123;</span><br><span class="line">        <span class="attribute">debuggable</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="保留小数点或者数字前面加0"><a href="#保留小数点或者数字前面加0" class="headerlink" title="保留小数点或者数字前面加0"></a>保留小数点或者数字前面加0</h2><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">DecimalFormat df1 = <span class="keyword">new</span> DecimalFormat(<span class="string">"0.0"</span>); </span><br><span class="line">DecimalFormat df2 = <span class="keyword">new</span> DecimalFormat(<span class="string">"#.#"</span>); </span><br><span class="line">DecimalFormat df3 = <span class="keyword">new</span> DecimalFormat(<span class="string">"000.000"</span>); </span><br><span class="line">DecimalFormat df4 = <span class="keyword">new</span> DecimalFormat(<span class="string">"###.###"</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">System</span>.out.println(df1.<span class="keyword">format</span>(<span class="number">12.34</span>)); <span class="comment">//12.3</span></span><br><span class="line"><span class="keyword">System</span>.out.println(df2.<span class="keyword">format</span>(<span class="number">12.34</span>)); <span class="comment">//12.3</span></span><br><span class="line"><span class="keyword">System</span>.out.println(df3.<span class="keyword">format</span>(<span class="number">12.34</span>)); <span class="comment">//012.340</span></span><br><span class="line"><span class="keyword">System</span>.out.println(df4.<span class="keyword">format</span>(<span class="number">12.34</span>)); <span class="comment">//12.34</span></span><br></pre></td></tr></table></figure>
+<h2 id="SwipeRefreshLayout一进入页面的时候刷新"><a href="#SwipeRefreshLayout一进入页面的时候刷新" class="headerlink" title="SwipeRefreshLayout一进入页面的时候刷新"></a>SwipeRefreshLayout一进入页面的时候刷新</h2><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mSwipeRefreshLayout.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mSwipeRefreshLayout.setRefreshing(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="git下载Android源码翻墙"><a href="#git下载Android源码翻墙" class="headerlink" title="git下载Android源码翻墙"></a>git下载Android源码翻墙</h2><p>首先ss翻墙，然后设置git代理<br>git config –global http.proxy ‘socks5://127.0.0.1:1080’<br>git config –global https.proxy ‘socks5://127.0.0.1:1080’</p>
+<h2 id="计算透明度"><a href="#计算透明度" class="headerlink" title="计算透明度"></a>计算透明度</h2><p>透明度换算，将百分比的透明度转换成16进制<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">double</span> i = <span class="number">1</span>; i &gt;= <span class="number">0</span>; i -= <span class="number">0.01</span>) &#123;</span><br><span class="line">    i = Math.<span class="built_in">round</span>(i * <span class="number">100</span>) / <span class="number">100.0</span>d;</span><br><span class="line">    <span class="built_in">int</span> <span class="built_in">alpha</span> = (<span class="built_in">int</span>) Math.<span class="built_in">round</span>(i * <span class="number">255</span>);</span><br><span class="line">    <span class="keyword">String</span> <span class="built_in">hex</span> = Integer.toHexString(<span class="built_in">alpha</span>).toUpperCase();</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">hex</span>.length() == <span class="number">1</span>) <span class="built_in">hex</span> = <span class="string">"0"</span> + <span class="built_in">hex</span>;</span><br><span class="line">    <span class="built_in">int</span> percent = (<span class="built_in">int</span>) (i * <span class="number">100</span>);</span><br><span class="line">    System.out.<span class="built_in">println</span>(<span class="keyword">String</span>.format(<span class="string">"%d%% — %s"</span>, percent, <span class="built_in">hex</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取apk的签名信息"><a href="#获取apk的签名信息" class="headerlink" title="获取apk的签名信息"></a>获取apk的签名信息</h2><p>将apk解压后找到META-INF/CERT.RSA 文件<br>使用<br><code>keytool -printcert -file META-INF/CERT.RSA</code>可以获取到<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Owner: <span class="attr">EMAILADDRESS=android@intel.com,</span> <span class="attr">CN=Android,</span> <span class="attr">OU=MCG,</span> <span class="attr">O=Intel,</span> <span class="attr">L=Santa</span> Clara, <span class="attr">ST=California,</span> <span class="attr">C=US</span></span><br><span class="line">Issuer: <span class="attr">EMAILADDRESS=android@intel.com,</span> <span class="attr">CN=Android,</span> <span class="attr">OU=MCG,</span> <span class="attr">O=Intel,</span> <span class="attr">L=Santa</span> Clara, <span class="attr">ST=California,</span> <span class="attr">C=US</span></span><br><span class="line">Serial number: <span class="number">892</span>c2587f2b10a34</span><br><span class="line">Valid from: Fri May <span class="number">25</span> <span class="number">17</span>:<span class="number">26</span>:<span class="number">54</span> CST <span class="number">2012</span> until: Wed Mar <span class="number">10</span> <span class="number">17</span>:<span class="number">26</span>:<span class="number">54</span> CST <span class="number">2286</span></span><br><span class="line">Certificate fingerprints:</span><br><span class="line">     MD5:  <span class="number">47</span>:FB:<span class="number">36</span>:<span class="number">92</span>:<span class="number">0</span>B:<span class="number">3</span>E:<span class="number">0</span>B:CD:<span class="number">8</span>D:<span class="number">61</span>:<span class="number">1</span>A:<span class="number">2</span>F:<span class="number">3</span>F:<span class="number">08</span>:DF:<span class="number">8</span>F</span><br><span class="line">     SHA1: <span class="number">6</span>C:<span class="number">10</span>:<span class="number">27</span>:<span class="number">53</span>:A1:<span class="number">6</span>D:<span class="number">44</span>:<span class="number">6</span>E:<span class="number">8</span>F:C4:EF:<span class="number">20</span>:<span class="number">9</span>F:<span class="number">4</span>D:F4:<span class="number">01</span>:D3:<span class="number">87</span>:<span class="number">56</span>:<span class="number">99</span></span><br><span class="line">     Signature algorithm name: SHA1withRSA</span><br><span class="line">     Version: <span class="number">3</span></span><br><span class="line"></span><br><span class="line">Extensions:</span><br><span class="line"></span><br><span class="line"><span class="comment">#1: ObjectId: 2.5.29.14 Criticality=false</span></span><br><span class="line">SubjectKeyIdentifier [</span><br><span class="line">KeyIdentifier [</span><br><span class="line"><span class="number">0000</span>: <span class="number">01</span> <span class="number">7</span>D <span class="number">34</span> <span class="number">1</span>F <span class="number">01</span> D1 <span class="number">34</span> <span class="number">4</span>B   E5 FC DF <span class="number">33</span> AF B3 <span class="number">67</span> <span class="number">52</span>  ..<span class="number">4</span>...<span class="number">4</span>K...<span class="number">3</span>..gR</span><br><span class="line"><span class="number">0010</span>: <span class="number">59</span> <span class="number">19</span> <span class="number">10</span> <span class="number">30</span>                                        Y..<span class="number">0</span></span><br><span class="line">]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#2: ObjectId: 2.5.29.19 Criticality=false</span></span><br><span class="line">BasicConstraints:[</span><br><span class="line">  CA:<span class="literal">true</span></span><br><span class="line">  PathLen:<span class="number">2147483647</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#3: ObjectId: 2.5.29.35 Criticality=false</span></span><br><span class="line">AuthorityKeyIdentifier [</span><br><span class="line">KeyIdentifier [</span><br><span class="line"><span class="number">0000</span>: <span class="number">01</span> <span class="number">7</span>D <span class="number">34</span> <span class="number">1</span>F <span class="number">01</span> D1 <span class="number">34</span> <span class="number">4</span>B   E5 FC DF <span class="number">33</span> AF B3 <span class="number">67</span> <span class="number">52</span>  ..<span class="number">4</span>...<span class="number">4</span>K...<span class="number">3</span>..gR</span><br><span class="line"><span class="number">0010</span>: <span class="number">59</span> <span class="number">19</span> <span class="number">10</span> <span class="number">30</span>                                        Y..<span class="number">0</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">[<span class="attr">EMAILADDRESS=android@intel.com,</span> <span class="attr">CN=Android,</span> <span class="attr">OU=MCG,</span> <span class="attr">O=Intel,</span> <span class="attr">L=Santa</span> Clara, <span class="attr">ST=California,</span> <span class="attr">C=US]</span></span><br><span class="line">SerialNumber: [    <span class="number">892</span>c2587 f2b10a34]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h2 id="Android-Studio-no-debuggable-applications"><a href="#Android-Studio-no-debuggable-applications" class="headerlink" title="Android Studio no debuggable applications"></a>Android Studio no debuggable applications</h2><p>解决方法<br>Tools–&gt;Android–&gt;Enable ADB Integration active</p>
+<h2 id="获取设备的一些标识"><a href="#获取设备的一些标识" class="headerlink" title="获取设备的一些标识"></a>获取设备的一些标识</h2><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">getIMEI</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">    TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);</span><br><span class="line">    <span class="keyword">if</span> (!TextUtils.isEmpty(tm.getDeviceId())) &#123;</span><br><span class="line">        <span class="function"><span class="keyword">return</span> tm.<span class="title">getDeviceId</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">getIMSI</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">    TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);</span><br><span class="line">    <span class="keyword">if</span> (!TextUtils.isEmpty(tm.getSubscriberId())) &#123;</span><br><span class="line">        <span class="function"><span class="keyword">return</span> tm.<span class="title">getSubscriberId</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">getWIFIMAC</span><span class="params">(Context ctx)</span></span>&#123;</span><br><span class="line">    WifiManager wifiMan = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);</span><br><span class="line">    <span class="keyword">if</span>(!TextUtils.isEmpty(wifiMan.getConnectionInfo().getMacAddress()))&#123;</span><br><span class="line">        <span class="keyword">return</span> wifiMan.getConnectionInfo().getMacAddress();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">getSN</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Build.SERIAL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">String <span class="title">getBlueToothAdd</span><span class="params">(Context ctx)</span></span>&#123;</span><br><span class="line">    BluetoothAdapter bAdapt= BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">    <span class="keyword">if</span> (bAdapt != <span class="keyword">null</span>)&#123;  </span><br><span class="line">        <span class="keyword">if</span> (!bAdapt.isEnabled())&#123;</span><br><span class="line">            <span class="function"><span class="keyword">return</span> bAdapt.<span class="title">getAddress</span><span class="params">()</span></span>;</span><br><span class="line">        &#125;  </span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="RecyclerView-的-LayoutManager"><a href="#RecyclerView-的-LayoutManager" class="headerlink" title="RecyclerView 的 LayoutManager"></a>RecyclerView 的 LayoutManager</h2><p>rv 的 Layoutmanager 可以直接申明在 xml 中,具体代码可查看RecyclerView.createLayoutManager 方法.</p>
+<h2 id="单例模式的写法"><a href="#单例模式的写法" class="headerlink" title="单例模式的写法"></a>单例模式的写法</h2><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> SettingsDbHelper sInst = <span class="keyword">null</span>;  <span class="comment">// &lt;&lt;&lt; 这里添加了 volatile  </span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function">SettingsDbHelper <span class="title">getInstance</span><span class="params">(Context context)</span> </span>&#123;  </span><br><span class="line">    SettingsDbHelper inst = sInst;  <span class="comment">// &lt;&lt;&lt; 在这里创建临时变量</span></span><br><span class="line">    <span class="keyword">if</span> (inst == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (SettingsDbHelper.class) &#123;</span><br><span class="line">            inst = sInst;</span><br><span class="line">            <span class="keyword">if</span> (inst == <span class="keyword">null</span>) &#123;</span><br><span class="line">                inst = <span class="keyword">new</span> SettingsDbHelper(context);</span><br><span class="line">                sInst = inst;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inst;  <span class="comment">// &lt;&lt;&lt; 注意这里返回的是临时变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关机代码"><a href="#关机代码" class="headerlink" title="关机代码"></a>关机代码</h2><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">加上权限</span><br><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.SHUTDOWN"</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> ACTION_REQUEST_SHUTDOWN=<span class="string">"android.intent.action.ACTION_REQUEST_SHUTDOWN"</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">String</span> EXTRA_KEY_CONFIRM=<span class="string">"android.intent.extra.KEY_CONFIRM"</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 启动 Activity.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> onShutdown() &#123;</span><br><span class="line">    Intent i=<span class="keyword">new</span> Intent(ACTION_REQUEST_SHUTDOWN);</span><br><span class="line">    i.putExtra(EXTRA_KEY_CONFIRM, <span class="keyword">false</span>);</span><br><span class="line">    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">    startActivity(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="恢复出厂设置"><a href="#恢复出厂设置" class="headerlink" title="恢复出厂设置"></a>恢复出厂设置</h2><figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=<span class="string">"android.permission.MASTER_CLEAR"</span>/&gt;</span><br><span class="line"></span><br><span class="line">Intent i = new Intent(<span class="string">"android.intent.action.MASTER_CLEAR"</span>)<span class="comment">;</span></span><br><span class="line">i.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)<span class="comment">;</span></span><br><span class="line">sendBroadcast(i)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/tips/" rel="tag">#tips</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/31/Android-customerView01/" rel="next" title="【Android自定义View】自定义简单的表盘">
+                <i class="fa fa-chevron-left"></i> 【Android自定义View】自定义简单的表盘
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/06/Java01/" rel="prev" title="Java回顾一">
+                Java回顾一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/03/Android-tips/"
+           data-title="Android-tips" data-url="http://blog.honge.me/2015/11/03/Android-tips/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Honge" />
+          <p class="site-author-name" itemprop="name">Honge</p>
+          <p class="site-description motion-element" itemprop="description">万丈高楼平地起</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xiaohong001" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/f791401690" target="_blank">
+                  
+                    <i class="fa fa-twitter"></i> Twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1863100721" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:f791401690@gmail.com" target="_blank">
+                  
+                    <i class="fa fa-email"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio配置签名"><span class="nav-number">1.</span> <span class="nav-text">Android Studio配置签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需要byte数组中有String又有二进制文件的处理方式"><span class="nav-number">2.</span> <span class="nav-text">需要byte数组中有String又有二进制文件的处理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Service中弹出dialog"><span class="nav-number">3.</span> <span class="nav-text">在Service中弹出dialog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aidl中要使用另外实体类的时候"><span class="nav-number">4.</span> <span class="nav-text">aidl中要使用另外实体类的时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aidi中需要使用的类不加包名时"><span class="nav-number">5.</span> <span class="nav-text">aidi中需要使用的类不加包名时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INSTALL-FAILED-UID-CHANGED"><span class="nav-number">6.</span> <span class="nav-text">INSTALL_FAILED_UID_CHANGED</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eventbus-在remote-service中会发送失败"><span class="nav-number">7.</span> <span class="nav-text">eventbus 在remote service中会发送失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio-插件"><span class="nav-number">8.</span> <span class="nav-text">Android Studio 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-Studio-Prettify"><span class="nav-number">8.0.1.</span> <span class="nav-text">Android Studio Prettify</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-Parcelable-code-Generator"><span class="nav-number">8.0.2.</span> <span class="nav-text">Android Parcelable code Generator</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机启动一个没有界面的Service"><span class="nav-number">9.</span> <span class="nav-text">开机启动一个没有界面的Service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种方式"><span class="nav-number">9.1.</span> <span class="nav-text">第一种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种方式"><span class="nav-number">9.2.</span> <span class="nav-text">第二种方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-5-0以上不能使用隐式启动Service"><span class="nav-number">10.</span> <span class="nav-text">Android 5.0以上不能使用隐式启动Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setOnTouchListener时ACTION-UP不触发的情况"><span class="nav-number">11.</span> <span class="nav-text">setOnTouchListener时ACTION_UP不触发的情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描指定文件夹"><span class="nav-number">12.</span> <span class="nav-text">扫描指定文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleCursorAdapter"><span class="nav-number">13.</span> <span class="nav-text">SimpleCursorAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio-使用过程中会出现-no-debuggable-applications的情况，原因是没有设置的debuggable。"><span class="nav-number">14.</span> <span class="nav-text">Android Studio 使用过程中会出现 no debuggable applications的情况，原因是没有设置的debuggable。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保留小数点或者数字前面加0"><span class="nav-number">15.</span> <span class="nav-text">保留小数点或者数字前面加0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SwipeRefreshLayout一进入页面的时候刷新"><span class="nav-number">16.</span> <span class="nav-text">SwipeRefreshLayout一进入页面的时候刷新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git下载Android源码翻墙"><span class="nav-number">17.</span> <span class="nav-text">git下载Android源码翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算透明度"><span class="nav-number">18.</span> <span class="nav-text">计算透明度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取apk的签名信息"><span class="nav-number">19.</span> <span class="nav-text">获取apk的签名信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio-no-debuggable-applications"><span class="nav-number">20.</span> <span class="nav-text">Android Studio no debuggable applications</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取设备的一些标识"><span class="nav-number">21.</span> <span class="nav-text">获取设备的一些标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RecyclerView-的-LayoutManager"><span class="nav-number">22.</span> <span class="nav-text">RecyclerView 的 LayoutManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式的写法"><span class="nav-number">23.</span> <span class="nav-text">单例模式的写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关机代码"><span class="nav-number">24.</span> <span class="nav-text">关机代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复出厂设置"><span class="nav-number">25.</span> <span class="nav-text">恢复出厂设置</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honge</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honge"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      //ds.src = 'http://xiaohong001.github.io/embed.js'
+      //ds.src = '//wsgzao.github.io/embed_ua.js';
+      ds.charset = 'UTF-8';
+      //(document.getElementsByTagName('head')[0]
+      //延迟加载多说js
+      (document.getElementById('footer')
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
