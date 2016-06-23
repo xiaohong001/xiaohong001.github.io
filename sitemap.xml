@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.honge.me/2016/06/23/ubuntu-tips/</loc>
+    
+    <lastmod>2016-06-23T10:12:40.989Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.honge.me/2016/06/16/Android-move-NavigationBar-to-left/</loc>
     
-    <lastmod>2016-06-16T03:21:20.593Z</lastmod>
+    <lastmod>2016-06-16T03:21:20.000Z</lastmod>
     
   </url>
   
@@ -58,21 +65,7 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2015/11/06/Java01/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.honge.me/2016/01/29/Android-art-05/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.honge.me/2016/02/01/Android-art-06/</loc>
+    <loc>http://blog.honge.me/2016/01/13/JavaScript-learn01/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -100,7 +93,21 @@
   </url>
   
   <url>
+    <loc>http://blog.honge.me/2016/02/01/Android-art-06/</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.honge.me/2015/10/31/Android-customerView01/</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.honge.me/2015/12/20/Android-art-03/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -114,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2015/12/05/Android-art-01/</loc>
+    <loc>http://blog.honge.me/2016/01/04/Android-mvp/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -128,7 +135,7 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2016/01/04/Android-mvp/</loc>
+    <loc>http://blog.honge.me/2015/11/30/Android-recyclerviewtips/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -136,13 +143,6 @@
   
   <url>
     <loc>http://blog.honge.me/2016/03/30/Android-receiver-for-multiple-actions/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.honge.me/2015/11/30/Android-recyclerviewtips/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -163,35 +163,21 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2016/03/29/Android-adb/</loc>
+    <loc>http://blog.honge.me/2015/11/06/Java01/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2016/01/22/Android-xposed-simChanger/</loc>
+    <loc>http://blog.honge.me/2016/01/29/Android-art-05/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2016/01/10/Android-art-04/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.honge.me/2015/11/11/Java02/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.honge.me/2016/01/13/JavaScript-learn01/</loc>
+    <loc>http://blog.honge.me/2015/12/05/Android-art-01/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -205,7 +191,21 @@
   </url>
   
   <url>
+    <loc>http://blog.honge.me/2016/01/22/Android-xposed-simChanger/</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.honge.me/2015/08/27/hexo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.honge.me/2015/11/11/Java02/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -233,7 +233,7 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2015/10/29/socket01/</loc>
+    <loc>http://blog.honge.me/2016/03/29/Android-adb/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -247,7 +247,14 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2015/12/20/Android-art-03/</loc>
+    <loc>http://blog.honge.me/2015/10/29/socket01/</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.honge.me/2016/01/10/Android-art-04/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -261,13 +268,6 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/2015/12/30/tools-list/</loc>
-    
-    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.honge.me/2016/01/09/tools-rime/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
@@ -275,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/about/index.html</loc>
+    <loc>http://blog.honge.me/2015/12/30/tools-list/</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
@@ -289,6 +289,13 @@
   </url>
   
   <url>
+    <loc>http://blog.honge.me/about/index.html</loc>
+    
+    <lastmod>2016-03-31T03:59:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.honge.me/guestbook/index.html</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
@@ -296,14 +303,14 @@
   </url>
   
   <url>
-    <loc>http://blog.honge.me/tags/index.html</loc>
+    <loc>http://blog.honge.me/tools/index.html</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.honge.me/tools/index.html</loc>
+    <loc>http://blog.honge.me/tags/index.html</loc>
     
     <lastmod>2016-03-31T03:59:50.000Z</lastmod>
     
