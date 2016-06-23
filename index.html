@@ -52,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
 
 
 
@@ -184,16 +184,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -220,6 +210,16 @@
               <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
             
             工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -280,6 +280,136 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/16/Android-move-NavigationBar-to-left/" itemprop="url">
+                  Android将导航栏移动到设备的左边
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-16T10:47:35+08:00" content="2016-06-16">
+              2016-06-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/16/Android-move-NavigationBar-to-left/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/16/Android-move-NavigationBar-to-left/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/16/Android-move-NavigationBar-to-left/" class="leancloud_visitors" data-flag-title="Android将导航栏移动到设备的左边">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          需求项目需求需要将导航栏移动到设备左边，改动的地方就两个类
+移动到左边在framework/base/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java中，计算了导航栏的位置，主要是改变导航栏左边的坐标值。12345678910111213141516171819202122232425262728293031323334diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.javaold mode 100644new mode 100755index 49cf37d..beebbd8--- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java+++ b/policy/src/com/
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/16/Android-move-NavigationBar-to-left/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1431,118 +1561,6 @@ Drawable的分类BitmapDrawable最简单的Drawable，表示的就是一张图�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/29/Android-art-05/" itemprop="url">
-                  Android开发艺术探索读书笔记：五
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-29T11:15:33+08:00" content="2016-01-29">
-              2016-01-29
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/29/Android-art-05/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/29/Android-art-05/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/01/29/Android-art-05/" class="leancloud_visitors" data-flag-title="Android开发艺术探索读书笔记：五">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          第五章理解RemoteViewsRemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。
-RemoteViews的应用主要用在通知栏和桌面小部件。
-RemoteViews在通知栏的应用普通通知栏的使用1234567891011121314151617NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);mBuilder.setContentTitle(name)//设置通知栏标题        .setContentText(content) //设置通知栏显示内容&lt;/span&gt;        .setContentIntent(getDefal
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/29/Android-art-05/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1588,7 +1606,7 @@ RemoteViews在通知栏的应用普通通知栏的使用123456789101112131415161
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -52,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=0.5.0" />
 
 
 
@@ -184,16 +184,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -220,6 +210,16 @@
               <i class="menu-item-icon fa fa-wrench fa-fw"></i> <br />
             
             工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -280,6 +280,118 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/29/Android-art-05/" itemprop="url">
+                  Android开发艺术探索读书笔记：五
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-29T11:15:33+08:00" content="2016-01-29">
+              2016-01-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/29/Android-art-05/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/29/Android-art-05/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/01/29/Android-art-05/" class="leancloud_visitors" data-flag-title="Android开发艺术探索读书笔记：五">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          第五章理解RemoteViewsRemoteViews表示的是一个View结构，它可以在其他进程中显示，由于它是在其他线程中显示的，为了能够更新它的界面，RemoteViews提供了一组基础的操作用于跨进程更新它的界面。
+RemoteViews的应用主要用在通知栏和桌面小部件。
+RemoteViews在通知栏的应用普通通知栏的使用1234567891011121314151617NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);mBuilder.setContentTitle(name)//设置通知栏标题        .setContentText(content) //设置通知栏显示内容&lt;/span&gt;        .setContentIntent(getDefal
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/29/Android-art-05/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1400,161 +1512,6 @@ Dagger 2一些知识点，来自网络想要了解Dagger2，就必须要知道�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/30/tools-list/" itemprop="url">
-                  一些工具
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-30T13:19:26+08:00" content="2015-12-30">
-              2015-12-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/30/tools-list/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30/tools-list/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2015/12/30/tools-list/" class="leancloud_visitors" data-flag-title="一些工具">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          工欲善其事，必先利其器我的工具
-
-电脑 MacBook Pro 13’ 840 
-手机 小米3
-oh-my-zsh 
-iterm2
-BetterTouchTool
-输入法 Rime 官网:http://rime.im/ 使用姿势:http://www.dreamxu.com/install-config-squirrel/
-浏览器 Google Chrome
-你懂得 ShadowsocksX 
-词典 欧陆词典
-提醒 GisTimer
-Android Studio
-Sublime Text
-视频 Movist
-mind MindNote，StartUML
-Eclipse
-模拟器 GenyMotion
-虚拟机 VirtualBox
-音乐 网易云音乐
-快捷键提示 CheatSheet
-解压 The Unarchiver
-远程 TeamViewer，微软远程桌面连接
-Moom
-AndroidToolhttps://github.com/mortenjust/androidtool-mac
-博客 hexo
-adb+https://gist.github.com/race604/ecee9321b
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/30/tools-list/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1600,7 +1557,7 @@ adb+https://gist.github.com/race604/ecee9321b
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
